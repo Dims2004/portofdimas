@@ -2,6 +2,7 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import Reveal from "../components/Reveal";
 import { works, getWork, getWorkBySlug } from "../data/works";
 import { useLanguage } from "../lib/LanguageContext";
+import { withBase } from "../lib/assetPath";
 
 const toneGradients = {
   1: "from-[#4B4238] to-[#C9A24B]",
@@ -49,7 +50,7 @@ export default function WorkDetail() {
             className={`aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-2xl shadow-black/40 ${work.cover ? "" : `bg-gradient-to-br ${toneGradients[work.tone]}`}`}
           >
             {work.cover && (
-              <img src={work.cover} alt={work.title} className="h-full w-full object-cover" />
+              <img src={withBase(work.cover)} alt={work.title} className="h-full w-full object-cover" />
             )}
           </div>
         </Reveal>
@@ -77,7 +78,7 @@ export default function WorkDetail() {
                   className={`w-full overflow-hidden rounded-2xl ${imgSrc ? "" : `bg-gradient-to-br ${toneGradients[work.tone]} opacity-80`}`}
                   style={{ aspectRatio: i === 1 ? "3 / 4" : "4 / 3" }}
                 >
-                  {imgSrc && <img src={imgSrc} alt={caption} className="h-full w-full object-cover" />}
+                  {imgSrc && <img src={withBase(imgSrc)} alt={caption} className="h-full w-full object-cover" />}
                 </div>
                 <p className="mt-3 text-sm text-muted">{caption}</p>
               </Reveal>
