@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { withBase } from "../lib/assetPath";
 
 const toneGradients = {
   1: "from-[#4B4238] to-[#C9A24B]",
@@ -52,7 +53,7 @@ export default function WorkCard({ work, className = "" }) {
           className={`aspect-[4/3] w-full overflow-hidden ${work.cover ? "" : `bg-gradient-to-br ${toneGradients[work.tone]}`} transition-transform duration-500 group-hover:scale-[1.05]`}
         >
           {work.cover && (
-            <img src={work.cover} alt={work.title} className="h-full w-full object-cover" />
+            <img src={withBase(work.cover)} alt={work.title} className="h-full w-full object-cover" />
           )}
         </div>
         <div className="flex flex-col gap-2 p-6">
