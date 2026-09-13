@@ -1,0 +1,7 @@
+services:
+  portfolio:
+    build: .
+    container_name: portofolio-saya
+    ports:
+      - "8080:80"
+    restart: unless-stopped

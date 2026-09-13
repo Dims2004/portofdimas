@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Fraunces", "Iowan Old Style", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --color-bg: #121014;
+  --color-bg-alt: #17151a;
+  --color-surface: #1c1a20;
+  --color-border: #2b2830;
+  --color-ink: #ece8e1;
+  --color-muted: #9b968e;
+  --color-accent: #c9a24b;
+  --color-accent-2: #7c8b79;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #141216;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* cursor kustom disembunyikan otomatis di perangkat sentuh */
+@media (hover: none),
+(pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
+body.has-custom-cursor,
+body.has-custom-cursor a,
+body.has-custom-cursor button {
+  cursor: none;
+}
