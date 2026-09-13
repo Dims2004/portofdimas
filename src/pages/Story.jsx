@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Reveal from "../components/Reveal";
 import { useLanguage } from "../lib/LanguageContext";
+import { withBase } from "../lib/assetPath";
 
 export default function Story() {
   const { t } = useLanguage();
@@ -50,7 +51,7 @@ export default function Story() {
             whileHover={{ scale: 1.02 }}
           >
             <img
-              src="/fotoaim.png"
+              src={withBase("fotoaim.png")}
               alt="Foto Dimas Febrianto"
               draggable={false}
               className="h-full w-full select-none object-cover"
@@ -90,7 +91,7 @@ export default function Story() {
             <p className="mb-4 text-muted">{t.story.standP1}</p>
             <p className="mb-8 text-muted">{t.story.standP2}</p>
             <a
-              href="/CV DIMAS FEBRIANTO 2026.pdf"
+              href={withBase("CV DIMAS FEBRIANTO 2026.pdf")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm transition-colors hover:border-accent hover:text-accent"
