@@ -4,7 +4,8 @@
 // - tone     : angka 1-6, menentukan warna gradasi thumbnail (dipakai kalau cover/galleryImages kosong)
 // - size     : "lg" (2 kolom) atau "sm" (1 kolom) di grid bento
 // - cover    : path gambar sampul proyek. Taruh file gambar di folder public/,
-//              lalu isi "/nama-file.jpg". Kosongkan ("") kalau belum ada gambar.
+//              lalu isi TANPA garis miring di depan, contoh: "projects/aiot.jpg"
+//              (bukan "/projects/aiot.jpg"). Kosongkan ("") kalau belum ada gambar.
 // - id / en  : versi konten per bahasa (tags, summary, role, description, gallery)
 //              gallery.images (opsional): path gambar untuk tiap item galeri, urutannya
 //              harus sama dengan gallery caption
@@ -16,7 +17,7 @@ export const works = [
     tone: 1,
     size: "lg",
     year: "2025",
-    cover: "/projects/iot_pakankucing.jpeg", // contoh: "/projects/aiot-cat-feeder.jpg"
+    cover: "", // contoh: "/projects/aiot-cat-feeder.jpg"
     galleryImages: ["", "", ""], // isi path gambar untuk masing-masing item galeri di bawah
     id: {
       title: "AIoT Cat Feeder",
