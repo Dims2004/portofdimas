@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useLanguage } from "../lib/LanguageContext";
+import { withBase } from "../lib/assetPath";
 import LanguageSwitch from "./LanguageSwitch";
 
 export default function Navbar() {
@@ -20,8 +21,8 @@ export default function Navbar() {
           className="flex items-center gap-3 font-serif text-lg tracking-tight"
           onClick={() => setOpen(false)}
         >
-          {/* Ganti /logo.png dengan file logo Anda di folder public/ */}
-          <img src="/logo.png" alt="Logo Dimas Febrianto" className="h-8 w-8 rounded-full object-cover" />
+          {/* Ganti logo.png dengan file logo Anda di folder public/ */}
+          <img src={withBase("logo.png")} alt="Logo Dimas Febrianto" className="h-8 w-8 rounded-full object-cover" />
           Dimas Febrianto
         </Link>
 
@@ -38,7 +39,7 @@ export default function Navbar() {
             </NavLink>
           ))}
           <a
-            href="/CV DIMAS FEBRIANTO 2026.pdf"
+            href={withBase("CV DIMAS FEBRIANTO 2026.pdf")}
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted transition-colors hover:text-ink"
@@ -85,7 +86,7 @@ export default function Navbar() {
             </NavLink>
           ))}
           <a
-            href="/CV DIMAS FEBRIANTO 2026.pdf"
+            href={withBase("CV DIMAS FEBRIANTO 2026.pdf")}
             target="_blank"
             rel="noopener noreferrer"
             className="py-3 text-muted transition-colors hover:text-ink"
