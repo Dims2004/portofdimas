@@ -48,7 +48,7 @@ export const certificates = [
     slug: "Fundamental of Associate Network Administrator National",
     year: "2026",
     tone: 5,
-    image: "certificates/Fundamental_of_Associate_Network_Administrator_National",
+    image: "certificates/Fundamental_of_Associate_Network_Administrator_Nasional",
     id: {
       title: "Sertifikat Dasar-dasar Administrator Jaringan Asosiasi Nasional",
       issuer: "Digital Talent Scholarship 2026",
