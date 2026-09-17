@@ -86,6 +86,20 @@ export const certificates = [
       issuer: "Cisco Network Academy",
     },
   },
+        {
+    slug: "AN INTRODUCTION TO CRYPTOGRAPHY",
+    year: "2024",
+    tone: 11,
+    image: "certificates/coding.jpg",
+    id: {
+      title: "Sertifikat Pengantar Kriptografi",
+      issuer: "UNIVERSITY OF LEEDS, CLICK START AND INSTITUTE OF CODING",
+    },
+    en: {
+      title: "Certificate AN INTRODUCTION TO CRYPTOGRAPHY",
+      issuer: "UNIVERSITY OF LEEDS, CLICK START AND INSTITUTE OF CODING",
+    },
+  },
 ];
 
 export const getCertificate = (cert, lang) => ({
