@@ -7,6 +7,7 @@ export const translations = {
   id: {
     nav: {
       works: "Karya",
+      certificates: "Sertifikasi",
       story: "Cerita",
       cv: "Unduh CV",
       contact: "Kontak",
@@ -74,6 +75,10 @@ export const translations = {
       eyebrow: "Karya",
       heading: "Seluruh proyek yang pernah saya kerjakan",
     },
+    certifications: {
+      eyebrow: "Sertifikasi",
+      heading: "Sertifikat dan pencapaian yang pernah saya raih",
+    },
     workDetail: {
       back: "← Kembali ke karya",
       role: "Peran",
@@ -96,6 +101,7 @@ export const translations = {
   en: {
     nav: {
       works: "Works",
+      certificates: "Certifications",
       story: "Story",
       cv: "Download CV",
       contact: "Contact",
@@ -162,6 +168,10 @@ export const translations = {
     works: {
       eyebrow: "Works",
       heading: "All the projects I've worked on",
+    },
+    certifications: {
+      eyebrow: "Certifications",
+      heading: "Certificates and achievements I've earned",
     },
     workDetail: {
       back: "← Back to works",
