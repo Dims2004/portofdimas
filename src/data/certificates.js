@@ -17,17 +17,17 @@
 
 export const certificates = [
   {
-    slug: "sertifikat-contoh-1",
-    year: "2025",
+    slug: "Certificate_of_competency_assesment",
+    year: "2022",
     tone: 1,
-    image: "", // contoh: "certificates/sertifikat-contoh-1.jpg"
+    image: "certificates/Certificate_of_competency_assesment.jpg", // contoh: "certificates/sertifikat-contoh-1.jpg"
     id: {
-      title: "Nama Sertifikat",
-      issuer: "Nama Penyelenggara",
+      title: "Sertifikat Uji Kompetensi",
+      issuer: "SMK Telkom Sidoarjo",
     },
     en: {
-      title: "Certificate Name",
-      issuer: "Issuer Name",
+      title: "Certificate of Competency Assesment",
+      issuer: "SMK Telkom Sidoarjo",
     },
   },
   {
