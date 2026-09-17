@@ -72,6 +72,20 @@ export const certificates = [
       issuer: "SMK Telkom Sidoarjo",
     },
   },
+      {
+    slug: "Introduction Modern AI",
+    year: "2026",
+    tone: 9,
+    image: "certificates/Introduction_to_Modern_AI.jpg",
+    id: {
+      title: "Sertifikat Pengantar AI Modern",
+      issuer: "Cisco Network Academy",
+    },
+    en: {
+      title: "Certificate Introduction Modern AI",
+      issuer: "Cisco Network Academy",
+    },
+  },
 ];
 
 export const getCertificate = (cert, lang) => ({
