@@ -10,6 +10,7 @@ export default function Navbar() {
 
   const links = [
     { to: "/karya", label: t.nav.works },
+    { to: "/sertifikasi", label: t.nav.certificates },
     { to: "/cerita", label: t.nav.story },
   ];
 
