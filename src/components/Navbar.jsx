@@ -87,7 +87,7 @@ export default function Navbar() {
             </NavLink>
           ))}
           <a
-            href={withBase("CV DIMAS FEBRIANTO 2026.pdf")}
+            href={withBase("CV DIMAS FEBRIANTO.pdf")}
             target="_blank"
             rel="noopener noreferrer"
             className="py-3 text-muted transition-colors hover:text-ink"
