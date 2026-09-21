@@ -107,10 +107,16 @@ export default function WorkDetail() {
         </Reveal>
       </section>
 
-      {/* Deskripsi panjang, kolom sempit agar mudah dibaca */}
+      {/* Deskripsi panjang — rata kiri-kanan di layar besar, paragraf dipisah rapi */}
       <section className="mx-auto max-w-3xl px-6 py-16 sm:px-10">
         <Reveal>
-          <p className="whitespace-pre-line text-lg leading-relaxed text-muted">{work.description}</p>
+          <div className="space-y-6 text-lg leading-relaxed text-muted sm:text-justify sm:[hyphens:auto]">
+            {work.description
+              .split("\n\n")
+              .map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
+          </div>
         </Reveal>
       </section>
 
