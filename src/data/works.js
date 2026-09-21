@@ -17,8 +17,8 @@ export const works = [
     tone: 1,
     size: "lg",
     year: "2025",
-    cover: "", // contoh: "/projects/aiot-cat-feeder.jpg"
-    galleryImages: ["", "", ""], // isi path gambar untuk masing-masing item galeri di bawah
+    cover: "iot_pakankucing.jpeg", // contoh: "/projects/aiot-cat-feeder.jpg"
+    galleryImages: ["prototipe.jpg", "Catfeed1.jpg", "Catfeed2.png"], // isi path gambar untuk masing-masing item galeri di bawah
     id: {
       title: "AIoT Cat Feeder",
       tags: ["IoT", "Artificial Intelligence"],
@@ -27,7 +27,7 @@ export const works = [
       role: "IoT & AI Developer",
       description:
         "AIoT Cat Feeder adalah alat pemberi makan kucing otomatis yang menggabungkan Artificial Intelligence dan Internet of Things. Sistem ini dibangun menggunakan mikrokontroler ESP32 yang terhubung ke Firebase, sehingga pemilik kucing dapat memantau jadwal makan, sisa pakan, dan riwayat pemberian pakan dari mana saja secara real-time.\n\nModel AI digunakan untuk membantu mengatur porsi pemberian pakan secara lebih adaptif, sementara sistem IoT memastikan data sensor dan status alat selalu tersinkronisasi ke cloud. Proyek ini dikembangkan untuk menjawab kebutuhan pemilik hewan peliharaan yang memiliki mobilitas tinggi namun tetap ingin memastikan kucing mereka mendapatkan pakan tepat waktu.",
-      gallery: ["Perangkat AIoT Cat Feeder", "Dashboard pemantauan real-time", "Integrasi ESP32 dan Firebase"],
+      gallery: ["Prototipe IoT", "Gambar kucing yang sudah di boundingbox", "hasil visualisasi dari proses pelatihan model YOLOv8 selama 10 epoch"],
     },
     en: {
       title: "AIoT Cat Feeder",
