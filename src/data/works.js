@@ -31,9 +31,9 @@ export const works = [
     slug: "iot-smartwatch",
     tone: 3,
     size: "sm",
-    year: "2025",
-    cover: "",
-    galleryImages: ["", "", ""],
+    year: "2025 - 2026",
+    cover: "projects/jamiot3d.png",
+    galleryImages: ["projects/jam1.jpeg", "projects/jam2.jpg", "projects/jam3.jpg"],
     id: {
       title: "IoT Smartwatch",
       tags: ["IoT", "Wearable Device"],
@@ -42,7 +42,7 @@ export const works = [
       role: "IoT Developer",
       description:
         "IoT Smartwatch adalah perangkat wearable yang dirancang untuk memantau aktivitas fisik pengguna seperti duduk, berjalan, dan berlari, sekaligus mengukur detak jantung (BPM) secara real-time. Perangkat ini menggunakan mikrokontroler ESP32 sebagai otak sistem, sensor MPU6050 untuk mendeteksi gerakan, dan Pulse Sensor untuk membaca detak jantung.\n\nData dari sensor dikirim melalui protokol MQTT sehingga aktivitas pengguna dapat dipantau secara langsung dari aplikasi pemantauan. Proyek ini merupakan eksplorasi penerapan teknologi IoT pada bidang kesehatan dan gaya hidup aktif, dengan fokus pada efisiensi daya dan akurasi pembacaan sensor.",
-      gallery: ["Prototipe smartwatch", "Skema rangkaian ESP32 dan sensor", "Tampilan data aktivitas real-time"],
+      gallery: ["Skema Rangkaian ESP32 dan Sensor", "Monitoring Website", "Tampilan pengambilan Data pada partisipan"],
     },
     en: {
       title: "IoT Smartwatch",
@@ -52,7 +52,7 @@ export const works = [
       role: "IoT Developer",
       description:
         "IoT Smartwatch is a wearable device designed to track physical activity such as sitting, walking, and running, while also measuring heart rate (BPM) in real time. It uses an ESP32 microcontroller as the system's brain, an MPU6050 sensor for motion detection, and a Pulse Sensor for heart rate readings.\n\nSensor data is sent over the MQTT protocol so user activity can be monitored directly from a companion app. This project explores IoT technology applied to health and active lifestyles, with a focus on power efficiency and sensor accuracy.",
-      gallery: ["Smartwatch prototype", "ESP32 and sensor circuit diagram", "Real-time activity data view"],
+      gallery: ["ESP32 and Sensor Circuit Schematic", "Monitoring Website", "Data Acquisition Interface for Participants"],
     },
   },
   {
