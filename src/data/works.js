@@ -1,16 +1,3 @@
-// ============================================================
-// DATA PROYEK (bilingual: id / en)
-// - slug     : dipakai di URL, contoh "/work/nama-proyek"
-// - tone     : angka 1-6, menentukan warna gradasi thumbnail (dipakai kalau cover/galleryImages kosong)
-// - size     : "lg" (2 kolom) atau "sm" (1 kolom) di grid bento
-// - cover    : path gambar sampul proyek. Taruh file gambar di folder public/,
-//              lalu isi TANPA garis miring di depan, contoh: "projects/aiot.jpg"
-//              (bukan "/projects/aiot.jpg"). Kosongkan ("") kalau belum ada gambar.
-// - id / en  : versi konten per bahasa (tags, summary, role, description, gallery)
-//              gallery.images (opsional): path gambar untuk tiap item galeri, urutannya
-//              harus sama dengan gallery caption
-// ============================================================
-
 export const works = [
   {
     slug: "aiot-cat-feeder",
