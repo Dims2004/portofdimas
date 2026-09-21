@@ -63,7 +63,7 @@ export const translations = {
         "Misi saya sederhana: mengubah data dan ide menjadi solusi teknologi yang benar-benar membantu kehidupan sehari-hari orang lain.",
       toolsTitle: "Tools sehari-hari",
       experience: [
-        { role: "Mahasiswa Informatika", company: "Fokus Data Analytics, IoT & AI", period: "2022 — 2026" },
+        { role: "Mahasiswa Informatika", company: "Fokus Data Science, IoT & AI, Web Development, Artificial Inteligence, Visualisasi Data", period: "2022 — 2026" },
         { role: "HIMA Informatika", company: "Anggota Departemen Ekonomi Kewirausahaan", period: "2024 - 2025" },
         { role: "IoT & AI Developer", company: "Proyek Akademik AIoT Cat Feeder", period: "2025" },
         { role: "IoT Developer", company: "Proyek Tugas Akhir IoT Smartwatch", period: "2026" },
@@ -157,8 +157,8 @@ export const translations = {
       downloadCv: "⭳ Download my CV",
       toolsTitle: "Everyday tools",
       experience: [
-        { role: "Informatics Student", company: "Focused on Data Analytics, IoT & AI", period: "2022 — 2026" },
-        { role: "Student Association Informatics", company: "Member of the Department of Entrepreneurial Economics", period: "2024" },
+        { role: "Informatics Student", company: "Focused on Data Analytics, IoT & AI, Artificial Inteligence, Visualitation Data, Web Development", period: "2022 — 2026" },
+        { role: "Student Association Informatics", company: "Member of the Department of Entrepreneurial Economics", period: "2024 - 2025" },
         { role: "IoT & AI Developer", company: "AIoT Cat Feeder Academic Project", period: "2025" },
         { role: "IoT Developer", company: "IoT Smartwatch Final Project", period: "2026" },
         
