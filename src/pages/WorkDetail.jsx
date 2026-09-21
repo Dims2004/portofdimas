@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import Reveal from "../components/Reveal";
+import ImageLightbox from "../components/ImageLightbox";
 import { works, getWork, getWorkBySlug } from "../data/works";
 import { useLanguage } from "../lib/LanguageContext";
 import { withBase } from "../lib/assetPath";
@@ -17,11 +19,36 @@ export default function WorkDetail() {
   const { slug } = useParams();
   const { t, lang } = useLanguage();
   const work = getWorkBySlug(slug, lang);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
   if (!work) return <Navigate to="/karya" replace />;
 
   const index = works.findIndex((w) => w.slug === slug);
   const next = getWork(works[(index + 1) % works.length], lang);
+
+  // Gabungkan cover + semua foto galeri jadi satu daftar, biar bisa
+  // saling geser (next/prev) di dalam lightbox yang sama.
+  // Foto yang belum ada gambarnya (kosong) tidak dimasukkan, supaya
+  // tidak ada slot kosong yang ikut kebuka di lightbox.
+  const lightboxImages = [
+    work.cover ? { src: work.cover, alt: work.title, caption: work.title } : null,
+    ...work.gallery.map((caption, i) => {
+      const imgSrc = work.galleryImages?.[i];
+      return imgSrc ? { src: imgSrc, alt: caption, caption } : null;
+    }),
+  ].filter(Boolean);
+
+  // Karena cover bisa saja kosong, cari index cover & tiap galeri di
+  // dalam lightboxImages secara dinamis, bukan diasumsikan tetap 0, 1, 2, 3.
+  const coverLightboxIndex = work.cover
+    ? lightboxImages.findIndex((img) => img.src === work.cover)
+    : -1;
+
+  const galleryLightboxIndex = (galleryIdx) => {
+    const imgSrc = work.galleryImages?.[galleryIdx];
+    if (!imgSrc) return -1;
+    return lightboxImages.findIndex((img) => img.src === imgSrc);
+  };
 
   return (
     <article>
@@ -46,13 +73,19 @@ export default function WorkDetail() {
         </Reveal>
 
         <Reveal delay={0.1} className="lg:-mb-24">
-          <div
-            className={`aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-2xl shadow-black/40 ${work.cover ? "" : `bg-gradient-to-br ${toneGradients[work.tone]}`}`}
+          <button
+            type="button"
+            onClick={() => coverLightboxIndex !== -1 && setLightboxIndex(coverLightboxIndex)}
+            disabled={coverLightboxIndex === -1}
+            aria-label={work.cover ? `Lihat gambar penuh ${work.title}` : undefined}
+            className={`aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-2xl shadow-black/40 ${
+              work.cover ? "cursor-zoom-in" : `cursor-default bg-gradient-to-br ${toneGradients[work.tone]}`
+            }`}
           >
             {work.cover && (
               <img src={withBase(work.cover)} alt={work.title} className="h-full w-full object-cover" />
             )}
-          </div>
+          </button>
         </Reveal>
       </section>
 
@@ -68,24 +101,38 @@ export default function WorkDetail() {
         <div className="grid gap-6 sm:grid-cols-3">
           {work.gallery.map((caption, i) => {
             const imgSrc = work.galleryImages?.[i];
+            const targetIndex = galleryLightboxIndex(i);
             return (
               <Reveal
                 key={caption}
                 delay={i * 0.08}
                 className={i === 1 ? "sm:mt-10" : ""}
               >
-                <div
-                  className={`w-full overflow-hidden rounded-2xl ${imgSrc ? "" : `bg-gradient-to-br ${toneGradients[work.tone]} opacity-80`}`}
+                <button
+                  type="button"
+                  onClick={() => targetIndex !== -1 && setLightboxIndex(targetIndex)}
+                  disabled={targetIndex === -1}
+                  aria-label={imgSrc ? `Lihat gambar penuh ${caption}` : undefined}
+                  className={`w-full overflow-hidden rounded-2xl ${
+                    imgSrc ? "cursor-zoom-in" : `cursor-default bg-gradient-to-br ${toneGradients[work.tone]} opacity-80`
+                  }`}
                   style={{ aspectRatio: i === 1 ? "3 / 4" : "4 / 3" }}
                 >
                   {imgSrc && <img src={withBase(imgSrc)} alt={caption} className="h-full w-full object-cover" />}
-                </div>
+                </button>
                 <p className="mt-3 text-sm text-muted">{caption}</p>
               </Reveal>
             );
           })}
         </div>
       </section>
+
+      <ImageLightbox
+        images={lightboxImages}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onNavigate={setLightboxIndex}
+      />
 
       {/* Proyek berikutnya */}
       <section className="border-t border-border px-6 py-16 sm:px-10">
