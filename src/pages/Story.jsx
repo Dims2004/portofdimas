@@ -1,7 +1,11 @@
-import { motion } from "framer-motion";
 import Reveal from "../components/Reveal";
+import StoryPhotoCarousel from "../components/StoryPhotoCarousel";
 import { useLanguage } from "../lib/LanguageContext";
 import { withBase } from "../lib/assetPath";
+
+// Daftar foto yang tampil di carousel bagian "How I got here".
+// Tinggal tambah / hapus / ganti nama file di sini, urutan array = urutan swipe.
+const storyPhotos = ["fotoaim.png", "FOTO1.jpeg", "FOTO2.jpeg", "FOTO3.jpeg"];
 
 export default function Story() {
   const { t } = useLanguage();
@@ -20,7 +24,7 @@ export default function Story() {
         <Reveal className="max-w-2xl">
           <p className="mb-4 text-sm text-accent-2">{t.story.eyebrow}</p>
           <h1 className="font-serif text-4xl leading-tight sm:text-5xl">{t.story.heading}</h1>
-          <a
+          
             href="mailto:febridimas905@gmail.com"
             className="mt-8 inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm transition-colors hover:border-accent hover:text-accent"
           >
@@ -37,26 +41,9 @@ export default function Story() {
           <p className="text-muted">{t.story.journeyP2}</p>
         </Reveal>
 
-        {/* Mockup foto bertumpuk ala polaroid — foto paling atas bisa digeser (drag) */}
-        <Reveal delay={0.1} className="relative mx-auto h-72 w-64 sm:h-80 sm:w-72">
-          <div className="pointer-events-none absolute inset-0 rotate-6 rounded-sm bg-surface shadow-2xl shadow-black/40" />
-          <div className="pointer-events-none absolute inset-0 -rotate-3 rounded-sm bg-surface shadow-2xl shadow-black/40" />
-          <motion.div
-            className="absolute inset-0 cursor-grab overflow-hidden rounded-sm shadow-2xl shadow-black/50 active:cursor-grabbing"
-            drag
-            dragElastic={0.15}
-            dragSnapToOrigin
-            dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
-            whileDrag={{ scale: 1.06, boxShadow: "0 25px 45px rgba(0,0,0,0.55)" }}
-            whileHover={{ scale: 1.02 }}
-          >
-            <img
-              src={withBase("fotoaim.png")}
-              alt="Foto Dimas Febrianto"
-              draggable={false}
-              className="h-full w-full select-none object-cover"
-            />
-          </motion.div>
+        {/* Mockup foto bertumpuk ala polaroid — bisa di-swipe kalau foto lebih dari satu */}
+        <Reveal delay={0.1} className="pb-8">
+          <StoryPhotoCarousel photos={storyPhotos} alt="Foto Dimas Febrianto" />
         </Reveal>
       </section>
 
@@ -90,7 +77,7 @@ export default function Story() {
             <p className="mb-4 font-serif italic text-accent-2">{t.story.standTitle}</p>
             <p className="mb-4 text-muted">{t.story.standP1}</p>
             <p className="mb-8 text-muted">{t.story.standP2}</p>
-            <a
+            
               href={withBase("CV DIMAS FEBRIANTO.pdf")}
               target="_blank"
               rel="noopener noreferrer"
