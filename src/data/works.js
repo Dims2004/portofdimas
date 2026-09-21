@@ -60,9 +60,8 @@ export const works = [
     slug: "sosialisasi-pembelajaran-era-digital",
     tone: 5,
     size: "sm",
-    year: "2024",
-    cover: "",
-    galleryImages: ["", "", ""],
+    year: "2025",
+    cover: "projects/sosialisasi.jpeg",
     id: {
       title: "Sosialisasi Pembelajaran Era Digital",
       tags: ["Pengabdian Masyarakat", "Edukasi"],
@@ -71,7 +70,6 @@ export const works = [
       role: "Volunteer & Public Speaker",
       description:
         "Proyek ini merupakan kegiatan pengabdian masyarakat yang diselenggarakan bersama Telkom University Surabaya di SMP Widya Darma. Kegiatan bertujuan untuk meningkatkan literasi digital para siswa serta memperkenalkan pemanfaatan teknologi dalam proses belajar mengajar di era digital.\n\nDalam kegiatan ini, saya berperan aktif sebagai pembicara sekaligus fasilitator diskusi, berbagi pengetahuan dasar mengenai teknologi digital dan bagaimana menggunakannya secara bijak dan produktif. Pengalaman ini melatih kemampuan public speaking dan kerja sama tim dalam menyampaikan materi edukatif kepada audiens pelajar.",
-      gallery: ["Sesi sosialisasi di kelas", "Diskusi interaktif bersama siswa", "Dokumentasi bersama tim Telkom University"],
     },
     en: {
       title: "Digital Era Learning Outreach",
@@ -81,7 +79,6 @@ export const works = [
       role: "Volunteer & Public Speaker",
       description:
         "This project was a community service activity held together with Telkom University Surabaya at SMP Widya Darma. It aimed to improve students' digital literacy and introduce the use of technology in teaching and learning during the digital era.\n\nIn this activity, I actively served as a speaker and discussion facilitator, sharing basic knowledge about digital technology and how to use it wisely and productively. The experience helped sharpen my public speaking and teamwork skills in delivering educational material to a student audience.",
-      gallery: ["Classroom outreach session", "Interactive discussion with students", "Documentation with the Telkom University team"],
     },
   },
 ];
