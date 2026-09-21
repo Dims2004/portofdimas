@@ -26,13 +26,17 @@ export default function WorkDetail() {
   const index = works.findIndex((w) => w.slug === slug);
   const next = getWork(works[(index + 1) % works.length], lang);
 
+  // gallery bersifat opsional — kalau project tidak diisi gallery,
+  // dianggap array kosong supaya tidak error
+  const gallery = work.gallery || [];
+
   // Gabungkan cover + semua foto galeri jadi satu daftar, biar bisa
   // saling geser (next/prev) di dalam lightbox yang sama.
   // Foto yang belum ada gambarnya (kosong) tidak dimasukkan, supaya
   // tidak ada slot kosong yang ikut kebuka di lightbox.
   const lightboxImages = [
     work.cover ? { src: work.cover, alt: work.title, caption: work.title } : null,
-    ...work.gallery.map((caption, i) => {
+    ...gallery.map((caption, i) => {
       const imgSrc = work.galleryImages?.[i];
       return imgSrc ? { src: imgSrc, alt: caption, caption } : null;
     }),
@@ -72,7 +76,7 @@ export default function WorkDetail() {
           </dl>
 
           {work.link && (
-            <a
+            
               href={work.link}
               target="_blank"
               rel="noopener noreferrer"
@@ -110,36 +114,38 @@ export default function WorkDetail() {
         </Reveal>
       </section>
 
-      {/* Galeri — kolom tidak seragam tingginya */}
-      <section className="mx-auto max-w-6xl px-6 pb-24 sm:px-10">
-        <div className="grid gap-6 sm:grid-cols-3">
-          {work.gallery.map((caption, i) => {
-            const imgSrc = work.galleryImages?.[i];
-            const targetIndex = galleryLightboxIndex(i);
-            return (
-              <Reveal
-                key={caption}
-                delay={i * 0.08}
-                className={i === 1 ? "sm:mt-10" : ""}
-              >
-                <button
-                  type="button"
-                  onClick={() => targetIndex !== -1 && setLightboxIndex(targetIndex)}
-                  disabled={targetIndex === -1}
-                  aria-label={imgSrc ? `Lihat gambar penuh ${caption}` : undefined}
-                  className={`w-full overflow-hidden rounded-2xl ${
-                    imgSrc ? "cursor-zoom-in" : `cursor-default bg-gradient-to-br ${toneGradients[work.tone]} opacity-80`
-                  }`}
-                  style={{ aspectRatio: i === 1 ? "3 / 4" : "4 / 3" }}
+      {/* Galeri — hanya tampil kalau project ini punya data gallery */}
+      {gallery.length > 0 && (
+        <section className="mx-auto max-w-6xl px-6 pb-24 sm:px-10">
+          <div className="grid gap-6 sm:grid-cols-3">
+            {gallery.map((caption, i) => {
+              const imgSrc = work.galleryImages?.[i];
+              const targetIndex = galleryLightboxIndex(i);
+              return (
+                <Reveal
+                  key={caption}
+                  delay={i * 0.08}
+                  className={i === 1 ? "sm:mt-10" : ""}
                 >
-                  {imgSrc && <img src={withBase(imgSrc)} alt={caption} className="h-full w-full object-cover" />}
-                </button>
-                <p className="mt-3 text-sm text-muted">{caption}</p>
-              </Reveal>
-            );
-          })}
-        </div>
-      </section>
+                  <button
+                    type="button"
+                    onClick={() => targetIndex !== -1 && setLightboxIndex(targetIndex)}
+                    disabled={targetIndex === -1}
+                    aria-label={imgSrc ? `Lihat gambar penuh ${caption}` : undefined}
+                    className={`w-full overflow-hidden rounded-2xl ${
+                      imgSrc ? "cursor-zoom-in" : `cursor-default bg-gradient-to-br ${toneGradients[work.tone]} opacity-80`
+                    }`}
+                    style={{ aspectRatio: i === 1 ? "3 / 4" : "4 / 3" }}
+                  >
+                    {imgSrc && <img src={withBase(imgSrc)} alt={caption} className="h-full w-full object-cover" />}
+                  </button>
+                  <p className="mt-3 text-sm text-muted">{caption}</p>
+                </Reveal>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       <ImageLightbox
         images={lightboxImages}
