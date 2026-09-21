@@ -1,4 +1,4 @@
-# Portofolio Anda — React + Vite + Tailwind CSS
+# Portofolio Dimas — React + Vite + Tailwind CSS
 
 Versi React dari portofolio Anda, lengkap dengan halaman **Karya** (daftar & detail tiap proyek),
 halaman **Cerita** (tentang Anda), layout asimetris (bento grid, bukan tumpukan lurus), dan animasi
