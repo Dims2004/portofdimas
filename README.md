@@ -25,6 +25,63 @@ src/
     Story.jsx                 -> /cerita, tentang Anda + timeline
     NotFound.jsx               -> halaman 404
 ```
+## Struktur Folder
+
+```
+portofdimas/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml              # Workflow GitHub Actions untuk build & deploy otomatis
+├── public/
+│   ├── certificates/                # Gambar-gambar sertifikat (ditampilkan di halaman Certifications)
+│   ├── projects/                    # Gambar cover & galeri tiap proyek (ditampilkan di halaman Works & WorkDetail)
+│   ├── CV DIMAS FEBRIANTO.pdf
+│   ├── CV DIMAS FEBRIANTO 2026.pdf
+│   ├── FOTO1.jpeg / FOTO2.jpeg / FOTO3.jpeg / fotoaim.png   # Foto untuk carousel di halaman Story
+│   └── logo.png
+├── src/
+│   ├── assets/
+│   │   └── hero.png                 # Aset gambar statis yang di-bundle Vite
+│   ├── components/
+│   │   ├── BubbleTransition.jsx      # Animasi transisi antar halaman
+│   │   ├── CertificateLightbox.jsx   # Modal popup untuk lihat sertifikat full-size
+│   │   ├── CustomCursor.jsx          # Kursor custom
+│   │   ├── Footer.jsx
+│   │   ├── ImageLightbox.jsx         # Modal popup generik untuk lihat gambar proyek full-size (dengan navigasi next/prev)
+│   │   ├── LanguageSwitch.jsx        # Tombol ganti bahasa ID/EN
+│   │   ├── Navbar.jsx
+│   │   ├── Reveal.jsx                # Wrapper animasi fade-in saat elemen muncul di layar
+│   │   ├── StoryPhotoCarousel.jsx    # Carousel foto yang bisa di-swipe di halaman Story
+│   │   └── WorkCard.jsx              # Kartu preview proyek di halaman Works
+│   ├── data/
+│   │   ├── certificates.js           # Data semua sertifikat (judul, penerbit, tahun, gambar)
+│   │   └── works.js                  # Data semua proyek (judul, deskripsi, galeri, link, dll)
+│   ├── lib/
+│   │   ├── assetPath.js              # Helper resolve path aset (public/)
+│   │   ├── LanguageContext.jsx       # Context React untuk state bahasa ID/EN
+│   │   └── translations.js           # Semua teks statis situs (2 bahasa)
+│   ├── pages/
+│   │   ├── Certifications.jsx        # Halaman daftar sertifikat
+│   │   ├── Home.jsx                  # Halaman utama/landing
+│   │   ├── NotFound.jsx              # Halaman 404
+│   │   ├── Story.jsx                 # Halaman "How I got here" / cerita
+│   │   ├── WorkDetail.jsx            # Halaman detail satu proyek
+│   │   └── Works.jsx                 # Halaman daftar semua proyek
+│   ├── App.jsx                       # Root komponen & routing
+│   ├── index.css                     # Style global + konfigurasi Tailwind
+│   └── main.jsx                      # Entry point React
+├── .dockerignore
+├── .gitignore
+├── .oxlintrc.json                    # Konfigurasi linter
+├── docker-compose.yml
+├── Dockerfile
+├── index.html                        # HTML shell utama (dipakai Vite)
+├── nginx.conf                        # Konfigurasi nginx (kalau deploy via Docker)
+├── package.json
+├── package-lock.json
+├── README.md
+└── vite.config.js                    # Konfigurasi build Vite
+```
 
 ## Yang perlu diganti
 
