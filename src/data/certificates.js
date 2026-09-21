@@ -103,7 +103,7 @@ export const certificates = [
           {
     slug: "Certificate EKWU HIMA",
     year: "2024 - 2025",
-    tone: 11,
+    tone: 13,
     image: "certificates/EKWU.jpg",
     id: {
       title: "Sertifikat Anggota Departemen EKWU",
