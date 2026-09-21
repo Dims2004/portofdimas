@@ -32,6 +32,7 @@ export const works = [
     tone: 3,
     size: "sm",
     year: "2025 - 2026",
+    link: "https://github.com/Dims2004/iot_activity.git",
     cover: "projects/jamiot3d.png",
     galleryImages: ["projects/jam1.jpeg", "projects/jam2.jpg", "projects/jam3.jpg"],
     id: {
@@ -90,6 +91,7 @@ export const getWork = (work, lang) => ({
   tone: work.tone,
   size: work.size,
   year: work.year,
+  link: work.link,
   cover: work.cover,
   galleryImages: work.galleryImages,
   ...work[lang],
