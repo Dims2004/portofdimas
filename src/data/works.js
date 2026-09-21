@@ -17,8 +17,8 @@ export const works = [
     tone: 1,
     size: "lg",
     year: "2025",
-    cover: "iot_pakankucing.jpeg", // contoh: "/projects/aiot-cat-feeder.jpg"
-    galleryImages: ["prototipe.jpg", "Catfeed1.jpg", "Catfeed2.png"], // isi path gambar untuk masing-masing item galeri di bawah
+    cover: "projects/iot_pakankucing.jpeg", // contoh: "/projects/aiot-cat-feeder.jpg"
+    galleryImages: ["projects/prototipe.jpg", "projects/Catfeed1.jpg", "projects/Catfeed2.png"], // isi path gambar untuk masing-masing item galeri di bawah
     id: {
       title: "AIoT Cat Feeder",
       tags: ["IoT", "Artificial Intelligence"],
@@ -37,7 +37,7 @@ export const works = [
       role: "IoT & AI Developer",
       description:
         "AIoT Cat Feeder is an automatic cat feeding device that combines Artificial Intelligence and Internet of Things. It's built on an ESP32 microcontroller connected to Firebase, letting cat owners monitor feeding schedules, remaining food, and feeding history from anywhere in real time.\n\nAn AI model helps adjust portion sizes more adaptively, while the IoT system keeps sensor data and device status always synced to the cloud. The project was built for pet owners with busy schedules who still want to make sure their cat gets fed on time.",
-      gallery: ["AIoT Cat Feeder device", "Real-time monitoring dashboard", "ESP32 and Firebase integration"],
+      gallery: ["Prototipe IoT", "Image of a cat with a bounding box applied", "visualization of the YOLOv8 model training process over 10 epochs"],
     },
   },
   {
