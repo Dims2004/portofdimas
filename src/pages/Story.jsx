@@ -91,7 +91,7 @@ export default function Story() {
             <p className="mb-4 text-muted">{t.story.standP1}</p>
             <p className="mb-8 text-muted">{t.story.standP2}</p>
             <a
-              href={withBase("CV DIMAS FEBRIANTO 2026.pdf")}
+              href={withBase("CV DIMAS FEBRIANTO.pdf")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm transition-colors hover:border-accent hover:text-accent"
