@@ -61,7 +61,6 @@ export const translations = {
         "Saya percaya teknologi paling bernilai ketika sederhana untuk dipakai dan jelas manfaatnya. Karena itu saya selalu berusaha memahami masalah secara menyeluruh sebelum menulis satu baris kode pun, teliti pada detail teknis kecil seperti akurasi sensor atau kestabilan koneksi, dan terbuka menerima masukan untuk terus memperbaiki hasil kerja.",
       standP2:
         "Misi saya sederhana: mengubah data dan ide menjadi solusi teknologi yang benar-benar membantu kehidupan sehari-hari orang lain.",
-      downloadCv: "⭳ Unduh CV saya",
       toolsTitle: "Tools sehari-hari",
       experience: [
         { role: "Mahasiswa Informatika", company: "Fokus Data Analytics, IoT & AI", period: "2022 — 2026" },
