@@ -24,6 +24,8 @@ export default function Story() {
         <Reveal className="max-w-2xl">
           <p className="mb-4 text-sm text-accent-2">{t.story.eyebrow}</p>
           <h1 className="font-serif text-4xl leading-tight sm:text-5xl">{t.story.heading}</h1>
+
+          <a
             href="mailto:febridimas905@gmail.com"
             className="mt-8 inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm transition-colors hover:border-accent hover:text-accent"
           >
@@ -76,6 +78,8 @@ export default function Story() {
             <p className="mb-4 font-serif italic text-accent-2">{t.story.standTitle}</p>
             <p className="mb-4 text-muted">{t.story.standP1}</p>
             <p className="mb-8 text-muted">{t.story.standP2}</p>
+
+            <a
               href={withBase("CV DIMAS FEBRIANTO.pdf")}
               target="_blank"
               rel="noopener noreferrer"
