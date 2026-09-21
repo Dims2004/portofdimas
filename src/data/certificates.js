@@ -100,6 +100,20 @@ export const certificates = [
       issuer: "UNIVERSITY OF LEEDS, CLICK START AND INSTITUTE OF CODING",
     },
   },
+          {
+    slug: "Certificate EKWU HIMA",
+    year: "2024 - 2025",
+    tone: 11,
+    image: "certificates/EKWU.jpg",
+    id: {
+      title: "Sertifikat Anggota Departemen EKWU",
+      issuer: "HIMA INFORMATIKA UNIVERSITAS TELKOM SURABAYA",
+    },
+    en: {
+      title: "Certificate EKWU Department Member Certificate",
+      issuer: "HIMA INFORMATICS TELKOM UNIVERSITY SURABAYA",
+    },
+  },
 ];
 
 export const getCertificate = (cert, lang) => ({
