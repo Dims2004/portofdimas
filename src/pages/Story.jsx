@@ -97,7 +97,7 @@ export default function Story() {
           <Reveal className="ml-auto max-w-md text-right">
             <h2 className="mb-6 font-serif text-2xl sm:text-3xl">{t.story.toolsTitle}</h2>
             <div className="flex flex-wrap justify-end gap-2">
-              {["Python", "JavaScript", "ESP32 / Arduino", "Firebase", "React", "Figma"].map((tool) => (
+              {["Python", "JavaScript", "ESP32 / Arduino", "Firebase", "React"].map((tool) => (
                 <span key={tool} className="rounded-full border border-border px-4 py-2 text-sm text-ink">
                   {tool}
                 </span>
