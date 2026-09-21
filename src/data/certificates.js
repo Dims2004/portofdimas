@@ -114,6 +114,20 @@ export const certificates = [
       issuer: "HIMA INFORMATICS TELKOM UNIVERSITY SURABAYA",
     },
   },
+            {
+    slug: "Introduction to Critical Insfatructure Protection ",
+    year: "2026 - 2027",
+    tone: 15,
+    image: "certificates/OPSWAT.jpg",
+    id: {
+      title: "Sertifikat Pengantar Perlindungan Infrastruktur Kritis",
+      issuer: "OPSWAT Akademi",
+    },
+    en: {
+      title: "Certificate of Introduction to Critical Infrastructure Protection",
+      issuer: "OPSWAT Academy",
+    },
+  },
 ];
 
 export const getCertificate = (cert, lang) => ({
