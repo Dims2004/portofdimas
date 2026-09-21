@@ -72,7 +72,7 @@ export default function WorkDetail() {
           </dl>
 
           {work.link && (
-            
+            <a
               href={work.link}
               target="_blank"
               rel="noopener noreferrer"
