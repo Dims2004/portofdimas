@@ -115,7 +115,7 @@ export const certificates = [
     slug: "MikroTik Certified Network Associate ",
     year: "2022 - 2025",
     tone: 17,
-    image: "certificates/OPSWAT.jpg",
+    image: "certificates/MTCNA.jpg",
     id: {
       title: "Sertifikat Mikrotik",
       issuer: "MTCNA",
