@@ -111,6 +111,20 @@ export const certificates = [
       issuer: "OPSWAT Academy",
     },
   },
+              {
+    slug: "MikroTik Certified Network Associate ",
+    year: "2022 - 2025",
+    tone: 17,
+    image: "certificates/OPSWAT.jpg",
+    id: {
+      title: "Sertifikat Mikrotik",
+      issuer: "MTCNA",
+    },
+    en: {
+      title: "Certificate of Mikrotik",
+      issuer: "MTCNA",
+    },
+  },
 ];
 
 export const getCertificate = (cert, lang) => ({
