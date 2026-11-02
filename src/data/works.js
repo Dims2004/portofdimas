@@ -48,9 +48,8 @@ export const works = [
       summary:
         "Smartwatch berbasis IoT untuk memantau aktivitas pengguna dan detak jantung secara real-time menggunakan ESP32, MPU6050, dan Pulse Sensor.",
       role: "IoT Developer",
-      description:
-        "IoT Smartwatch adalah perangkat wearable yang dirancang untuk memantau aktivitas fisik pengguna seperti duduk, berjalan, dan berlari, sekaligus mengukur detak jantung (BPM) secara real-time. Perangkat ini menggunakan mikrokontroler ESP32 sebagai otak sistem, sensor MPU6050 untuk mendeteksi gerakan, dan Pulse Sensor untuk membaca detak jantung.\n\nData dari sensor dikirim melalui protokol MQTT sehingga aktivitas pengguna dapat dipantau secara langsung dari aplikasi pemantauan. Proyek ini merupakan eksplorasi penerapan teknologi IoT pada bidang kesehatan dan gaya hidup aktif, dengan fokus pada efisiensi daya dan akurasi pembacaan sensor.",
-      gallery: [
+        description:
+        "IoT Smartwatch adalah perangkat wearable yang dirancang untuk mengklasifikasikan aktivitas fisik pengguna (duduk, berjalan, dan berlari) sekaligus mengukur detak jantung (BPM) secara real-time. Perangkat ini menggunakan mikrokontroler ESP32 sebagai otak sistem, sensor MPU6050 untuk mendeteksi gerakan, Pulse Sensor untuk membaca detak jantung, dan layar OLED untuk menampilkan hasil pembacaan.\n\nData sensor dikirim melalui protokol MQTT ke website monitoring sehingga aktivitas pengguna dapat dipantau secara langsung. Klasifikasi aktivitas dilakukan dengan algoritma K-Nearest Neighbor (KNN) menggunakan dataset 13.410 data dari 15 partisipan. Nilai K optimal yang diperoleh adalah 18, dengan data BPM yang hilang ditangani melalui proses imputasi. Hasil akhirnya, model mencapai akurasi 83,69%.\n\nProyek ini merupakan eksplorasi penerapan IoT dan machine learning pada bidang kesehatan dan gaya hidup aktif, dengan fokus pada efisiensi daya dan akurasi pembacaan sensor.",
         "Skema Rangkaian ESP32 dan Sensor",
         "Monitoring Website",
         "Tampilan pengambilan Data pada partisipan",
@@ -65,8 +64,8 @@ export const works = [
       summary:
         "An IoT-based smartwatch that tracks user activity and heart rate in real time using ESP32, MPU6050, and a Pulse Sensor.",
       role: "IoT Developer",
-      description:
-        "IoT Smartwatch is a wearable device designed to track physical activity such as sitting, walking, and running, while also measuring heart rate (BPM) in real time. It uses an ESP32 microcontroller as the system's brain, an MPU6050 sensor for motion detection, and a Pulse Sensor for heart rate readings.\n\nSensor data is sent over the MQTT protocol so user activity can be monitored directly from a companion app. This project explores IoT technology applied to health and active lifestyles, with a focus on power efficiency and sensor accuracy.",
+        description:
+        "IoT Smartwatch is a wearable device designed to classify the user's physical activity (sitting, walking, and running) while also measuring heart rate (BPM) in real time. It uses an ESP32 microcontroller as the system's brain, an MPU6050 sensor for motion detection, a Pulse Sensor for heart rate readings, and an OLED display to show the readings.\n\nSensor data is sent over the MQTT protocol to a monitoring website so user activity can be tracked live. Activity classification uses the K-Nearest Neighbor (KNN) algorithm on a dataset of 13,410 samples collected from 15 participants. The optimal K value is 18, and missing BPM values are handled through imputation. The final model reaches an accuracy of 83.69%.\n\nThis project explores IoT and machine learning applied to health and active lifestyles, with a focus on power efficiency and sensor accuracy.",
       gallery: [
         "ESP32 and Sensor Circuit Schematic",
         "Monitoring Website",
