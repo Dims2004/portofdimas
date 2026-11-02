@@ -123,10 +123,6 @@ export const works = [
       gallery: [
         "Halaman beranda Sistem Inventory Gudang",
         "Dashboard admin",
-        "Flowchart alur kerja petugas gudang",
-        "Halaman laporan barang masuk",
-        "Halaman laporan barang keluar",
-        "Halaman update stok dengan opsi export Excel",
       ],
     },
     en: {
