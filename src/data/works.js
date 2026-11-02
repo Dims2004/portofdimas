@@ -109,8 +109,10 @@ export const works = [
     year: "2025",
     cover: "",
     galleryImages: [
-      "projects/inventory-home.png",
-      "projects/inventory-dashboard-admin.png",
+      "projects/halaman_web.png",
+      "projects/dashboard_admin.png",
+      "projects/menu_customer.png",
+      "projects/menu_suplier.png",
     ],
     id: {
       title: "Sistem Inventory Gudang",
@@ -123,6 +125,8 @@ export const works = [
       gallery: [
         "Halaman beranda Sistem Inventory Gudang",
         "Dashboard admin",
+        "Halaman Menu Customer",
+        "HaLaman Menu Suplier",
       ],
     },
     en: {
@@ -137,9 +141,8 @@ export const works = [
         "Warehouse Inventory System home page",
         "Admin dashboard",
         "Warehouse officer workflow flowchart",
-        "Incoming goods report page",
-        "Outgoing goods report page",
-        "Stock update page with Excel export option",
+        "Customer menu page",
+        "Suplier menu page",
       ],
     },
   },
