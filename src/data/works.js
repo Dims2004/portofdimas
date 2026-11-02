@@ -34,7 +34,7 @@ export const works = [
     year: "2025 - 2026",
     link: "https://github.com/Dims2004/iot_activity.git",
     cover: "projects/jamiot3d.png",
-    galleryImages: ["projects/jam1.jpeg", "projects/jam2.jpg", "projects/jam3.jpg", "project/bpmimputation.png", "project/matrix.jpg", "project/optimal_k.png"],
+    galleryImages: ["projects/jam1.jpeg", "projects/jam2.jpg", "projects/jam3.jpg", "projects/bpmimputation.png", "projects/matrix.jpg", "projects/optimal_k.png"],
     id: {
       title: "IoT Smartwatch",
       tags: ["IoT", "Wearable Device"],
