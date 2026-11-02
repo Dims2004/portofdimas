@@ -107,8 +107,8 @@ export default function WorkDetail() {
         </Reveal>
       </section>
 
-      {/* Deskripsi panjang — rata kanan-kiri (justify), sejajar di tengah */}
-      <section className="mx-auto max-w-3xl px-6 py-16 sm:px-10">
+      {/* Deskripsi panjang — rata kanan-kiri (justify), selebar galeri */}
+      <section className="mx-auto max-w-6xl px-6 py-16 sm:px-10">
         <Reveal>
           <div className="space-y-6 text-justify text-lg leading-relaxed text-muted [hyphens:auto]">
             {work.description
