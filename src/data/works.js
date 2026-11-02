@@ -107,7 +107,7 @@ export const works = [
     tone: 7,
     size: "sm",
     year: "2025",
-    cover: "",
+    cover: "projects/inventorycover.png",
     galleryImages: [
       "projects/halaman_web.png",
       "projects/dashboard_admin.png",
