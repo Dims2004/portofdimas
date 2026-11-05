@@ -1,0 +1,526 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Palet ungu kehitaman */
+  --color-bg: #09040f;
+  --color-bg-alt: #120824;
+  --color-surface: #1a0f30;
+  --color-border: rgba(196, 181, 253, 0.16);
+  --color-ink: #f5f0ff;
+  --color-muted: #b9aed6;
+  --color-accent: #a78bfa;
+  --color-accent-2: #c4b5fd;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #12061f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* ---------- Latar gradasi ungu-kehitaman (menempel di layar) ---------- */
+.app-bg {
+  position: relative;
+  isolation: isolate;
+}
+.app-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(900px 600px at 85% 5%, rgba(124, 58, 237, 0.42), transparent 62%),
+    radial-gradient(700px 500px at 5% 95%, rgba(91, 33, 182, 0.30), transparent 60%),
+    linear-gradient(140deg, #1f0b40 0%, #120623 42%, #09040f 100%);
+}
+
+/* ---------- Kartu kaca ---------- */
+.glass {
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(196, 181, 253, 0.16);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* ---------- Kursor ala macOS (panah hitam outline putih + tangan penunjuk) ---------- */
+html,
+body {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='28' viewBox='0 0 24 28'%3E%3Cpath d='M5 3V22.5L9.6 18.2L12.6 25L15.8 23.6L12.8 16.9H19Z' fill='black' stroke='white' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, default;
+}
+a,
+button,
+[role="button"],
+[role="switch"],
+summary,
+label[for],
+select,
+[data-pointer] {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cg fill='black' stroke='black' stroke-width='3.2' stroke-linejoin='round'%3E%3Crect x='10.5' y='2' width='4.6' height='15' rx='2.3'/%3E%3Crect x='15' y='9.5' width='4.4' height='10' rx='2.2'/%3E%3Crect x='19' y='11' width='4.2' height='9' rx='2.1'/%3E%3Crect x='22.4' y='12.5' width='3.6' height='8' rx='1.8'/%3E%3Crect x='7' y='14' width='19' height='11' rx='5.5'/%3E%3Crect x='3.2' y='13.5' width='4.4' height='8' rx='2.2' transform='rotate(-28 5.4 17.5)'/%3E%3C/g%3E%3Cg fill='white'%3E%3Crect x='10.5' y='2' width='4.6' height='15' rx='2.3'/%3E%3Crect x='15' y='9.5' width='4.4' height='10' rx='2.2'/%3E%3Crect x='19' y='11' width='4.2' height='9' rx='2.1'/%3E%3Crect x='22.4' y='12.5' width='3.6' height='8' rx='1.8'/%3E%3Crect x='7' y='14' width='19' height='11' rx='5.5'/%3E%3Crect x='3.2' y='13.5' width='4.4' height='8' rx='2.2' transform='rotate(-28 5.4 17.5)'/%3E%3C/g%3E%3Cg stroke='black' stroke-width='1' stroke-linecap='round'%3E%3Cpath d='M15.2 14.5V19'/%3E%3Cpath d='M19.2 15V19'/%3E%3Cpath d='M22.8 16V19.5'/%3E%3C/g%3E%3C/svg%3E") 13 2, pointer;
+}
+button:disabled {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='28' viewBox='0 0 24 28'%3E%3Cpath d='M5 3V22.5L9.6 18.2L12.6 25L15.8 23.6L12.8 16.9H19Z' fill='black' stroke='white' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ============================================================
+   SLIDE PORTOFOLIO (A4 landscape) — hanya tampil saat cetak / Save as PDF
+   ============================================================ */
+#portfolio-print {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+  html,
+  body {
+    background: #09040f !important;
+    width: 297mm;
+    margin: 0 !important;
+    padding: 0 !important;
+    cursor: auto;
+  }
+  #root {
+    display: none !important;
+  }
+  #portfolio-print {
+    display: block;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+.pf-slide {
+  position: relative;
+  width: 297mm;
+  height: 209mm;
+  box-sizing: border-box;
+  padding: 15mm 18mm 16mm;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: #f5f0ff;
+  font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+  background: linear-gradient(140deg, #1f0b40 0%, #120623 45%, #09040f 100%);
+  break-after: page;
+  page-break-after: always;
+}
+#portfolio-print > :last-child .pf-slide,
+#portfolio-print > .pf-slide:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}
+.pf-glow {
+  position: absolute;
+  right: -40mm;
+  top: -40mm;
+  width: 140mm;
+  height: 140mm;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.38), transparent 65%);
+  pointer-events: none;
+}
+.pf-head {
+  position: relative;
+  margin-bottom: 7mm;
+}
+.pf-kicker {
+  display: block;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #c4b5fd;
+  margin-bottom: 2mm;
+}
+.pf-head h2 {
+  margin: 0;
+  font-size: 24pt;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+}
+.pf-rule {
+  display: block;
+  width: 14mm;
+  height: 0.9mm;
+  border-radius: 1mm;
+  background: #a78bfa;
+  margin-top: 3mm;
+}
+.pf-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.pf-foot {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4mm;
+  padding-top: 2.5mm;
+  border-top: 0.3mm solid rgba(196, 181, 253, 0.2);
+  font-size: 7.5pt;
+  color: #b9aed6;
+}
+
+.pf-p {
+  font-size: 10pt;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 3.5mm;
+}
+.pf-small {
+  font-size: 9pt;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 2.5mm;
+}
+.pf-strong {
+  font-size: 10.5pt;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #fff;
+  margin: 0 0 2.5mm;
+}
+.pf-muted {
+  font-size: 9pt;
+  color: #b9aed6;
+  margin: 0 0 1.5mm;
+}
+.pf-meta {
+  font-size: 9pt;
+  color: #c4b5fd;
+  margin: 3mm 0;
+}
+.pf-meta b {
+  color: #fff;
+}
+.pf-sub {
+  font-size: 11pt;
+  font-weight: 700;
+  color: #c4b5fd;
+  margin: 0 0 3mm;
+}
+.pf-cols {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 10mm;
+}
+.pf-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5mm;
+  margin-bottom: 6mm;
+}
+.pf-grow {
+  flex: 1;
+  margin-bottom: 0;
+}
+.pf-card {
+  box-sizing: border-box;
+  padding: 5mm 6mm;
+  border-radius: 4mm;
+  background: rgba(255, 255, 255, 0.06);
+  border: 0.3mm solid rgba(196, 181, 253, 0.22);
+  margin-bottom: 4mm;
+  break-inside: avoid;
+}
+.pf-grid2 > .pf-card {
+  margin-bottom: 0;
+}
+.pf-card h3 {
+  margin: 0 0 2mm;
+  font-size: 10.5pt;
+  font-weight: 700;
+  color: #c4b5fd;
+}
+.pf-card h4 {
+  margin: 0 0 2mm;
+  font-size: 10.5pt;
+  font-weight: 700;
+  color: #fff;
+}
+.pf-card h4.pf-big {
+  font-size: 15pt;
+  line-height: 1.25;
+  margin: 3mm 0 2mm;
+}
+.pf-tall {
+  display: flex;
+  flex-direction: column;
+}
+.pf-chip,
+.pf-chips span {
+  display: inline-block;
+  font-size: 8pt;
+  font-weight: 600;
+  color: #e9defe;
+  padding: 1mm 3mm;
+  border-radius: 10mm;
+  border: 0.3mm solid rgba(196, 181, 253, 0.4);
+  background: rgba(167, 139, 250, 0.14);
+  align-self: flex-start;
+}
+.pf-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2mm;
+  margin: 0 0 3mm;
+}
+.pf-list {
+  margin: 2mm 0 3mm;
+  padding-left: 5mm;
+  font-size: 10pt;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+.pf-thumb {
+  margin-top: auto;
+  height: 52mm;
+}
+.pf-thumb .pf-img {
+  height: 100%;
+}
+
+.pf-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 3mm;
+  background-color: #1a0f30;
+}
+.pf-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(9, 4, 15, 0.55);
+}
+
+.pf-project {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 9mm;
+  flex: 1;
+  min-height: 0;
+}
+.pf-project-img {
+  height: 100%;
+  max-height: 135mm;
+}
+.pf-gallery {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  gap: 5mm;
+  align-content: center;
+}
+.pf-gallery figure,
+.pf-certs figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.pf-gallery .pf-img {
+  height: 62mm;
+}
+.pf-gallery figcaption {
+  font-size: 8.5pt;
+  line-height: 1.4;
+  color: #d8ccf5;
+  margin-top: 2mm;
+  text-align: center;
+}
+.pf-certs {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 5mm 6mm;
+}
+.pf-certs .pf-img {
+  flex: 1;
+  min-height: 0;
+}
+.pf-certs figcaption {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5mm;
+  font-size: 8pt;
+  line-height: 1.35;
+  color: #b9aed6;
+}
+.pf-certs figcaption b {
+  color: #fff;
+  font-size: 8.5pt;
+}
+
+/* Cover */
+.pf-cover {
+  flex-direction: row;
+  align-items: center;
+  gap: 14mm;
+  padding: 18mm 20mm;
+}
+.pf-cover-text {
+  position: relative;
+  flex: 1.2;
+}
+.pf-cover h1 {
+  margin: 0 0 6mm;
+  font-size: 40pt;
+  line-height: 1.05;
+  font-weight: 800;
+  color: #fff;
+}
+.pf-role {
+  margin: 0;
+  font-size: 15pt;
+  font-weight: 600;
+  color: #fff;
+}
+.pf-tags {
+  margin: 1.5mm 0 7mm;
+  font-size: 9pt;
+  color: #c4b5fd;
+}
+.pf-lead {
+  font-size: 11pt;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 120mm;
+  margin: 0 0 6mm;
+}
+.pf-mail {
+  font-size: 11pt;
+  font-weight: 700;
+  color: #c4b5fd;
+  margin: 0;
+}
+.pf-cover-photo {
+  position: relative;
+  width: 82mm;
+  flex: none;
+  border-radius: 6mm;
+  overflow: hidden;
+  border: 0.3mm solid rgba(255, 255, 255, 0.25);
+  background: #0d0719;
+}
+.pf-cover-photo img {
+  display: block;
+  width: 100%;
+  height: 100mm;
+  object-fit: cover;
+  object-position: top;
+  background: linear-gradient(#7c3aed, #1a0b38);
+}
+.pf-cover-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1mm;
+  padding: 5mm 6mm 6mm;
+}
+.pf-cover-card strong {
+  font-size: 17pt;
+  color: #fff;
+}
+.pf-cover-card span {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #a78bfa;
+}
+.pf-cover-card small {
+  font-size: 8pt;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Kontak */
+.pf-contact {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pf-mail-big {
+  font-size: 24pt;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 9mm;
+}
+.pf-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+}
+.pf-socials div {
+  display: flex;
+  gap: 6mm;
+  font-size: 10pt;
+  padding-bottom: 3mm;
+  border-bottom: 0.3mm solid rgba(196, 181, 253, 0.18);
+}
+.pf-socials b {
+  width: 28mm;
+  color: #c4b5fd;
+}
+.pf-socials span {
+  color: rgba(255, 255, 255, 0.85);
+}
+.pf-thanks {
+  margin: 12mm 0 0;
+  font-size: 13pt;
+  font-weight: 700;
+  color: #a78bfa;
+}
+
+/* Slide "Tentang": rapatkan supaya muat di A4 */
+.pf-tight .pf-p {
+  font-size: 9pt;
+  line-height: 1.5;
+  margin-bottom: 3mm;
+}
+.pf-tight .pf-small {
+  font-size: 8.5pt;
+  line-height: 1.45;
+  margin-bottom: 2mm;
+}
+.pf-tight .pf-card {
+  padding: 4mm 5mm;
+  margin-bottom: 3mm;
+}
+.pf-tight .pf-grid2 {
+  gap: 3mm;
+  margin-bottom: 3mm;
+}
+.pf-tight .pf-grid2 > .pf-card {
+  margin-bottom: 0;
+}
