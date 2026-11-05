@@ -18,10 +18,10 @@ export default function IdBadge() {
         style={{ transformOrigin: "50% -260px" }}
         className="relative"
       >
-        {/* tali lanyard menjulang ke atas, terpotong batas section */}
+        {/* tali lanyard: pendek di HP, menjulang ke atas di layar besar (PC) */}
         <div
           aria-hidden="true"
-          className="absolute bottom-full left-1/2 -mb-5 h-[120vh] w-3 -translate-x-1/2 bg-gradient-to-b from-black to-zinc-900"
+          className="absolute bottom-full left-1/2 -mb-5 h-14 w-3 -translate-x-1/2 rounded-t-full bg-gradient-to-b from-black/0 to-zinc-900 lg:h-[120vh] lg:rounded-none lg:from-black"
         />
         {/* cincin + klip */}
         <div
