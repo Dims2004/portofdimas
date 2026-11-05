@@ -23,18 +23,14 @@ export default function WorkDetail() {
 
   // Gabungkan cover + foto galeri jadi satu daftar untuk lightbox (next/prev)
   const lightboxImages = [
-    work.cover
-      ? { src: work.cover, alt: work.title, caption: work.title }
-      : null,
+    work.cover ? { src: work.cover, alt: work.title, caption: work.title } : null,
     ...gallery.map((caption, i) => {
       const imgSrc = work.galleryImages?.[i];
       return imgSrc ? { src: imgSrc, alt: caption, caption } : null;
     }),
   ].filter(Boolean);
 
-  const coverLightboxIndex = work.cover
-    ? lightboxImages.findIndex((img) => img.src === work.cover)
-    : -1;
+  const coverLightboxIndex = work.cover ? lightboxImages.findIndex((img) => img.src === work.cover) : -1;
 
   const galleryLightboxIndex = (galleryIdx) => {
     const imgSrc = work.galleryImages?.[galleryIdx];
@@ -46,18 +42,12 @@ export default function WorkDetail() {
     <article>
       <section className="mx-auto grid max-w-6xl gap-10 px-6 pb-16 pt-32 sm:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <Reveal>
-          <Link
-            to="/"
-            className="mb-8 inline-block text-sm text-white/60 transition-colors hover:text-white"
-          >
+          <Link to="/" className="mb-8 inline-block text-sm text-white/60 transition-colors hover:text-white">
             {t.workDetail.back}
           </Link>
           <div className="mb-4 flex flex-wrap gap-2">
             {work.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-accent-2"
-              >
+              <span key={tag} className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-accent-2">
                 {tag}
               </span>
             ))}
@@ -86,19 +76,8 @@ export default function WorkDetail() {
               className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white/10"
             >
               {t.workDetail.github}
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  d="M7 17L17 7M17 7H7M17 7V17"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M7 17L17 7M17 7H7M17 7V17" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
           )}
@@ -107,24 +86,14 @@ export default function WorkDetail() {
         <Reveal delay={0.1}>
           <button
             type="button"
-            onClick={() =>
-              coverLightboxIndex !== -1 && setLightboxIndex(coverLightboxIndex)
-            }
+            onClick={() => coverLightboxIndex !== -1 && setLightboxIndex(coverLightboxIndex)}
             disabled={coverLightboxIndex === -1}
-            aria-label={
-              work.cover ? `Lihat gambar penuh ${work.title}` : undefined
-            }
+            aria-label={work.cover ? `Lihat gambar penuh ${work.title}` : undefined}
             className={`glass block aspect-[4/3] w-full overflow-hidden rounded-3xl shadow-2xl shadow-black/40 ${
               work.cover ? "" : `bg-gradient-to-br ${toneGradient(work.tone)}`
             }`}
           >
-            {work.cover && (
-              <img
-                src={withBase(work.cover)}
-                alt={work.title}
-                className="h-full w-full object-cover"
-              />
-            )}
+            {work.cover && <img src={withBase(work.cover)} alt={work.title} className="h-full w-full object-cover" />}
           </button>
         </Reveal>
       </section>
@@ -139,43 +108,37 @@ export default function WorkDetail() {
         </Reveal>
       </section>
 
+      {/* Galeri — semua kartu seragam (rasio 16:10), baris terakhir otomatis di tengah */}
       {gallery.length > 0 && (
         <section className="mx-auto max-w-6xl px-6 pb-24 pt-6 sm:px-10">
-          <div className="grid gap-6 sm:grid-cols-3">
+          <div className="flex flex-wrap justify-center gap-6">
             {gallery.map((caption, i) => {
               const imgSrc = work.galleryImages?.[i];
               const targetIndex = galleryLightboxIndex(i);
               return (
                 <Reveal
                   key={caption}
-                  delay={i * 0.08}
-                  className={i % 3 === 1 ? "sm:mt-10" : ""}
+                  delay={(i % 3) * 0.08}
+                  className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
                 >
                   <button
                     type="button"
-                    onClick={() =>
-                      targetIndex !== -1 && setLightboxIndex(targetIndex)
-                    }
+                    onClick={() => targetIndex !== -1 && setLightboxIndex(targetIndex)}
                     disabled={targetIndex === -1}
-                    aria-label={
-                      imgSrc ? `Lihat gambar penuh ${caption}` : undefined
-                    }
-                    className={`glass block w-full overflow-hidden rounded-2xl ${
-                      imgSrc
-                        ? ""
-                        : `bg-gradient-to-br ${toneGradient(work.tone)} opacity-80`
+                    aria-label={imgSrc ? `Lihat gambar penuh ${caption}` : undefined}
+                    className={`glass group block aspect-[16/10] w-full overflow-hidden rounded-2xl transition duration-300 ${
+                      imgSrc ? "hover:-translate-y-1 hover:border-accent/50" : `bg-gradient-to-br ${toneGradient(work.tone)} opacity-80`
                     }`}
-                    style={{ aspectRatio: i % 3 === 1 ? "3 / 4" : "4 / 3" }}
                   >
                     {imgSrc && (
                       <img
                         src={withBase(imgSrc)}
                         alt={caption}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                       />
                     )}
                   </button>
-                  <p className="mt-3 text-sm text-muted">{caption}</p>
+                  <p className="mt-3 min-h-[2.5rem] text-sm leading-snug text-muted">{caption}</p>
                 </Reveal>
               );
             })}
@@ -192,14 +155,9 @@ export default function WorkDetail() {
 
       <section className="border-t border-white/10 px-6 py-16 sm:px-10">
         <Reveal className="mx-auto max-w-6xl">
-          <Link
-            to={`/karya/${next.slug}`}
-            className="group flex items-center justify-between gap-6"
-          >
+          <Link to={`/karya/${next.slug}`} className="group flex items-center justify-between gap-6">
             <div>
-              <p className="mb-2 text-sm text-muted">
-                {t.workDetail.nextProject}
-              </p>
+              <p className="mb-2 text-sm text-muted">{t.workDetail.nextProject}</p>
               <h2 className="text-3xl font-extrabold text-white transition-colors group-hover:text-accent-2 sm:text-4xl">
                 {next.title}
               </h2>
