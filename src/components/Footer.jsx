@@ -13,7 +13,7 @@ export default function Footer() {
   const gmailUrl =
     "https://mail.google.com/mail/?view=cm&fs=1" +
     `&to=${encodeURIComponent(profile.email)}` +
-    `&su=${encodeURIComponent(t.footer.mailSubject)}`;
+    `&su=${encodeURIComponent(t.footer.mailSubject ?? "")}`;
 
   return (
     <footer
@@ -64,7 +64,7 @@ export default function Footer() {
             href={`mailto:${profile.email}`}
             className="mt-4 inline-block text-xs text-muted underline-offset-4 transition-colors hover:text-white hover:underline"
           >
-            {t.footer.mailOther}
+            {t.footer.mailOther ?? "mailto"}
           </a>
         </Reveal>
 
