@@ -1,6 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { useLanguage } from "../lib/LanguageContext";
 import { scrollToSection } from "../lib/scrollTo";
 import LanguageSwitch from "./LanguageSwitch";
@@ -16,12 +23,54 @@ const ITEMS = [
   "contact",
 ];
 
+// Menu desktop dengan efek "dock" ala macOS:
+// item yang dekat kursor membesar & sedikit terangkat, tetangganya ikut membesar lebih kecil.
+function DockItem({ mouseX, active, onClick, children }) {
+  const ref = useRef(null);
+
+  // Jarak horizontal kursor ke titik tengah item ini
+  const distance = useTransform(mouseX, (x) => {
+    const r = ref.current?.getBoundingClientRect();
+    if (!r) return Infinity;
+    return x - (r.left + r.width / 2);
+  });
+
+  // Ubah angka-angka ini untuk mengatur kekuatan efek:
+  //  - 1.45 = skala maksimum item di bawah kursor
+  //  - 120  = jangkauan efek (px) ke kiri/kanan
+  const scaleRaw = useTransform(
+    distance,
+    [-120, -60, 0, 60, 120],
+    [1, 1.18, 1.45, 1.18, 1]
+  );
+  const scale = useSpring(scaleRaw, { mass: 0.1, stiffness: 170, damping: 14 });
+  const y = useTransform(scale, [1, 1.45], [0, -3]);
+
+  return (
+    <motion.button
+      ref={ref}
+      type="button"
+      onClick={onClick}
+      style={{ scale, y }}
+      className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
+        active
+          ? "bg-white/15 text-white"
+          : "text-white/65 hover:text-white"
+      }`}
+    >
+      {children}
+    </motion.button>
+  );
+}
+
 export default function Navbar() {
   const { t } = useLanguage();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("home");
+  const reduceMotion = useReducedMotion();
+  const mouseX = useMotionValue(Infinity);
 
   // Scroll-spy: tandai menu sesuai section yang sedang terlihat
   useEffect(() => {
@@ -75,20 +124,20 @@ export default function Navbar() {
             <span className="text-accent">.</span>
           </button>
 
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav
+            className="hidden items-center gap-2 lg:flex"
+            onMouseMove={(e) => !reduceMotion && mouseX.set(e.clientX)}
+            onMouseLeave={() => mouseX.set(Infinity)}
+          >
             {ITEMS.map((id) => (
-              <button
+              <DockItem
                 key={id}
-                type="button"
+                mouseX={mouseX}
+                active={active === id}
                 onClick={() => goTo(id)}
-                className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
-                  active === id
-                    ? "bg-white/15 text-white"
-                    : "text-white/65 hover:text-white"
-                }`}
               >
                 {t.nav[id]}
-              </button>
+              </DockItem>
             ))}
           </nav>
 
