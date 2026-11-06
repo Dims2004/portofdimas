@@ -104,6 +104,7 @@ export const translations = {
       preparing: "Menyiapkan…",
       mailSubject: "Halo Dimas, saya melihat portofolio Anda",
       mailOther: "Pakai aplikasi email lain",
+      visitorsToday: "Pengunjung hari ini",
     },
   },
 
@@ -207,6 +208,7 @@ export const translations = {
       preparing: "Preparing…",
       mailSubject: "Hi Dimas, I saw your portfolio",
       mailOther: "Use another email app",
+      visitorsToday: "Visitors today",
     },
   },
 };
