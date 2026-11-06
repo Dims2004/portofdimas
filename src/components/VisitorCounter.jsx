@@ -17,9 +17,21 @@ const STORAGE_KEY = "pf_visit_day";
 const todayWIB = () =>
   new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Jakarta" });
 
+// Baca angka dari respons API (toleran terhadap perbedaan nama field)
 const readCount = (data) => {
-  const n = Number(data?.count ?? data?.value);
-  return Number.isFinite(n) ? n : 0;
+  const candidates = [
+    data?.count,
+    data?.Count,
+    data?.value,
+    data?.data?.up_count,
+    data?.data?.count,
+  ];
+  for (const c of candidates) {
+    const n = Number(c);
+    if (c !== undefined && c !== null && Number.isFinite(n)) return n;
+  }
+  console.warn("[VisitorCounter] format respons tidak dikenali:", data);
+  return 0;
 };
 
 // Cegah hit ganda (mis. React StrictMode menjalankan effect 2x saat dev)
@@ -39,8 +51,12 @@ async function loadCount() {
   // Hari ini sudah dihitung dari perangkat ini -> cukup baca angkanya
   // Belum -> tambah 1, lalu tandai di localStorage
   const url = `${API}/${NAMESPACE}/${name}/${alreadyCounted ? "" : "up"}`;
-  const res = await fetch(url);
-  if (!res.ok) return 0; // counter hari ini belum ada -> tampilkan 0
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) {
+    // Counter hari ini belum ada (GET) atau layanan bermasalah -> tampilkan 0
+    console.warn("[VisitorCounter] gagal:", res.status, url);
+    return 0;
+  }
 
   if (!alreadyCounted) {
     try {
@@ -49,7 +65,9 @@ async function loadCount() {
       /* abaikan */
     }
   }
-  return readCount(await res.json());
+  const data = await res.json();
+  console.log("[VisitorCounter]", url, data);
+  return readCount(data);
 }
 
 function EyeIcon() {
