@@ -102,6 +102,8 @@ export const translations = {
       ctaEmail: "Kirim Email",
       ctaPortfolio: "Unduh Portofolio",
       preparing: "Menyiapkan…",
+      mailSubject: "Halo Dimas, saya melihat portofolio Anda",
+      mailOther: "Pakai aplikasi email lain",
     },
   },
 
@@ -203,6 +205,8 @@ export const translations = {
       ctaEmail: "Send an Email",
       ctaPortfolio: "Download Portfolio",
       preparing: "Preparing…",
+      mailSubject: "Hi Dimas, I saw your portfolio",
+      mailOther: "Use another email app",
     },
   },
 };
