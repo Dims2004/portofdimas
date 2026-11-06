@@ -4,6 +4,7 @@ import { useLanguage } from "../lib/LanguageContext";
 import { profile } from "../data/profile";
 import { withBase } from "../lib/assetPath";
 import PortfolioDownload from "./PortfolioDownload";
+import VisitorCounter from "./VisitorCounter";
 
 // Footer sekaligus section "Kontak" (id="contact")
 export default function Footer() {
@@ -89,6 +90,7 @@ export default function Footer() {
           <span>
             © {new Date().getFullYear()} {profile.name}
           </span>
+          <VisitorCounter />
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
