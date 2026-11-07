@@ -4,17 +4,12 @@ import { useLanguage } from "../lib/LanguageContext";
 import { profile } from "../data/profile";
 import { withBase } from "../lib/assetPath";
 import PortfolioDownload from "./PortfolioDownload";
+import EmailChooser from "./EmailChooser";
 import VisitorCounter from "./VisitorCounter";
 
 // Footer sekaligus section "Kontak" (id="contact")
 export default function Footer() {
   const { t } = useLanguage();
-
-  // Langsung buka layar tulis email di Gmail (tab baru), tanpa memilih aplikasi
-  const gmailUrl =
-    "https://mail.google.com/mail/?view=cm&fs=1" +
-    `&to=${encodeURIComponent(profile.email)}` +
-    `&su=${encodeURIComponent(t.footer.mailSubject ?? "")}`;
 
   return (
     <footer
@@ -34,23 +29,13 @@ export default function Footer() {
           </h2>
           <span className="mt-4 block h-[3px] w-14 rounded-full bg-white" />
           <p className="mt-8 text-sm text-accent-2">{t.footer.openFor}</p>
-          <a
-            href={gmailUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-block break-all text-2xl font-bold text-white transition-colors hover:text-accent-2 sm:text-4xl"
-          >
+          <EmailChooser className="mt-3 inline-block break-all text-left text-2xl font-bold text-white transition-colors hover:text-accent-2 sm:text-4xl">
             {profile.email}
-          </a>
+          </EmailChooser>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href={gmailUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-white px-7 py-3 text-sm font-semibold text-[#1b0d33] transition-transform hover:-translate-y-0.5"
-            >
+            <EmailChooser className="rounded-full bg-white px-7 py-3 text-sm font-semibold text-[#1b0d33] transition-transform hover:-translate-y-0.5">
               {t.footer.ctaEmail}
-            </a>
+            </EmailChooser>
             <a
               href={withBase(profile.cv)}
               target="_blank"
@@ -61,12 +46,6 @@ export default function Footer() {
             </a>
             <PortfolioDownload />
           </div>
-          <a
-            href={`mailto:${profile.email}`}
-            className="mt-4 inline-block text-xs text-muted underline-offset-4 transition-colors hover:text-white hover:underline"
-          >
-            {t.footer.mailOther ?? "mailto"}
-          </a>
         </Reveal>
 
         <Reveal delay={0.05} className="mt-16 border-t border-white/10 pt-8">
