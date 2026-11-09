@@ -1,39 +1,49 @@
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { withBase } from "../lib/assetPath";
 
 // ============================================================
 // Carousel foto ala polaroid untuk halaman Story.
-// Bisa digeser (swipe/drag) di mobile & desktop, ada tombol
-// panah kiri-kanan, dan dot indicator di bawah.
+// - Slide OTOMATIS tiap AUTOPLAY_MS (berhenti sementara saat kursor di atas foto,
+//   saat foto di-drag/disentuh, dan saat tab sedang tidak dibuka)
+// - Bisa digeser (swipe/drag), ada tombol panah dan dot indicator
+// - Timer mulai ulang setiap kali foto berganti (otomatis maupun manual)
 //
 // Cara pakai:
-// <StoryPhotoCarousel
-//   photos={["FOTO1.jpeg", "FOTO2.jpeg", "FOTO3.jpeg"]}
-//   alt="Foto Dimas Febrianto"
-// />
-// Tinggal tambah/kurangi item di array `photos`, jumlah foto bebas.
+// <StoryPhotoCarousel photos={["FOTO1.jpeg", "FOTO2.jpeg"]} alt="Foto Dimas" />
 // ============================================================
 
+const AUTOPLAY_MS = 4000; // jeda antar slide (ms), ubah sesuai selera
 const SWIPE_THRESHOLD = 60; // jarak (px) minimal drag supaya dianggap swipe
 const SWIPE_VELOCITY = 500; // atau kecepatan drag minimal (px/s)
 
 export default function StoryPhotoCarousel({ photos = [], alt = "" }) {
   const [[index, direction], setIndex] = useState([0, 0]);
-
-  if (!photos.length) return null;
+  const [hovered, setHovered] = useState(false);
+  const [dragging, setDragging] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   const total = photos.length;
-  const current = ((index % total) + total) % total; // biar aman kalau index negatif
+  const current = total ? ((index % total) + total) % total : 0; // aman kalau index negatif
 
-  const goTo = (newIndex, dir) => {
-    setIndex([newIndex, dir]);
-  };
-
+  const goTo = (newIndex, dir) => setIndex([newIndex, dir]);
   const goNext = () => goTo(current + 1, 1);
   const goPrev = () => goTo(current - 1, -1);
 
+  // Slide otomatis: timer baru setiap foto berganti, jeda saat hover/drag
+  useEffect(() => {
+    if (total < 2 || hovered || dragging || reduceMotion) return;
+    const timer = setTimeout(() => {
+      if (!document.hidden) setIndex(([i]) => [i + 1, 1]);
+      else setIndex(([i, d]) => [i, d]); // tab tidak aktif: lewati, timer diulang oleh efek ini
+    }, AUTOPLAY_MS);
+    return () => clearTimeout(timer);
+  }, [index, total, hovered, dragging, reduceMotion]);
+
+  if (!total) return null;
+
   const handleDragEnd = (_event, info) => {
+    setDragging(false);
     const { offset, velocity } = info;
     if (offset.x < -SWIPE_THRESHOLD || velocity.x < -SWIPE_VELOCITY) {
       goNext();
@@ -49,7 +59,11 @@ export default function StoryPhotoCarousel({ photos = [], alt = "" }) {
   };
 
   return (
-    <div className="relative mx-auto h-72 w-64 sm:h-80 sm:w-72">
+    <div
+      className="relative mx-auto h-72 w-64 sm:h-80 sm:w-72"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       {/* tumpukan kertas foto di belakang, murni dekorasi */}
       <div className="pointer-events-none absolute inset-0 rotate-6 rounded-sm bg-surface shadow-2xl shadow-black/40" />
       <div className="pointer-events-none absolute inset-0 -rotate-3 rounded-sm bg-surface shadow-2xl shadow-black/40" />
@@ -68,6 +82,7 @@ export default function StoryPhotoCarousel({ photos = [], alt = "" }) {
             dragElastic={0.15}
             dragConstraints={{ left: 0, right: 0 }}
             dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
+            onDragStart={() => setDragging(true)}
             onDragEnd={handleDragEnd}
             whileDrag={{ scale: 1.04 }}
             whileHover={{ scale: 1.02 }}
