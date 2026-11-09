@@ -12,7 +12,7 @@ export const profile = {
   photo: "fotoaim.png",
 
   // Foto yang bisa di-swipe di bagian "Tentang"
-  storyPhotos: ["fotolulus.jpeg", "FOTO1.jpeg", "FOTO2.jpeg", "FOTO3.jpeg"],
+  storyPhotos: ["fotolulus.jpeg", "FOTO1.jpeg", "FOTO2.jpeg", "FOTO3.jpeg","dimas12.jpeg"],
 
   socials: [
     {
