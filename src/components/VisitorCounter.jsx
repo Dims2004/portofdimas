@@ -6,13 +6,14 @@ import { useLanguage } from "../lib/LanguageContext";
 // - 1 perangkat/browser dihitung 1x per hari (ditandai di localStorage)
 // - Reset otomatis jadi 0 setiap pergantian hari (00.00 WIB),
 //   karena nama counter di server memakai tanggal hari itu.
-// - Angka diperbarui otomatis tiap 20 detik (dan saat tab dibuka lagi)
+// - Angka diperbarui otomatis tiap 5 detik (dan saat tab dibuka lagi)
+// - Tab yang masih terbuka saat lewat 00.00 WIB otomatis dihitung di hari baru
 // - Layanan gratis tanpa login: Abacus (utama), CounterAPI (cadangan)
 // ============================================================
 
 const NAMESPACE = "portofdimas-my-id"; // boleh diganti, harus unik
 const STORAGE_KEY = "pf_visit_day_v2";
-const REFRESH_MS = 20000;
+const REFRESH_MS = 5000;
 
 const PROVIDERS = [
   {
@@ -129,12 +130,29 @@ export default function VisitorCounter() {
 
   useEffect(() => {
     let alive = true;
+    let busy = false;
     const set = (n) => alive && n !== null && setCount(n);
 
     loadInitial().then(set);
 
-    const tick = () => {
-      if (!document.hidden) refresh().then(set);
+    const tick = async () => {
+      if (document.hidden || busy) return;
+      busy = true;
+      try {
+        const day = todayWIB();
+        // Lewat 00.00 WIB saat tab masih terbuka: hitung 1x di hari baru
+        if (readFlag() !== day) {
+          const n = await callProviders("hit", `visitors-${day}`);
+          if (n !== null) {
+            writeFlag(day);
+            set(n);
+            return;
+          }
+        }
+        set(await refresh());
+      } finally {
+        busy = false;
+      }
     };
     const timer = setInterval(tick, REFRESH_MS);
     document.addEventListener("visibilitychange", tick);
