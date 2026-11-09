@@ -3,19 +3,29 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { withBase } from "../lib/assetPath";
 
 // ============================================================
-// Carousel foto ala polaroid untuk halaman Story.
-// - Slide OTOMATIS tiap AUTOPLAY_MS (berhenti sementara saat kursor di atas foto,
-//   saat foto di-drag/disentuh, dan saat tab sedang tidak dibuka)
+// Carousel foto Story yang menyatu dengan latar belakang.
+// - Tepi foto memudar (degradasi) ke transparan, tanpa kotak/bayangan
+// - Slide OTOMATIS tiap AUTOPLAY_MS (berhenti saat hover/drag)
 // - Bisa digeser (swipe/drag), ada tombol panah dan dot indicator
-// - Timer mulai ulang setiap kali foto berganti (otomatis maupun manual)
 //
 // Cara pakai:
 // <StoryPhotoCarousel photos={["FOTO1.jpeg", "FOTO2.jpeg"]} alt="Foto Dimas" />
 // ============================================================
 
-const AUTOPLAY_MS = 4000; // jeda antar slide (ms), ubah sesuai selera
+const AUTOPLAY_MS = 4000; // jeda antar slide (ms)
 const SWIPE_THRESHOLD = 60; // jarak (px) minimal drag supaya dianggap swipe
 const SWIPE_VELOCITY = 500; // atau kecepatan drag minimal (px/s)
+
+// Seberapa lebar pinggiran yang memudar (0%-50%). Makin besar = makin lembut.
+const FADE = "24%";
+
+// Pudar di 4 sisi: gradien horizontal digabung (intersect) dengan gradien vertikal
+const FADE_MASK = {
+  WebkitMaskImage: `linear-gradient(to right, transparent 0%, #000 ${FADE}, #000 calc(100% - ${FADE}), transparent 100%), linear-gradient(to bottom, transparent 0%, #000 ${FADE}, #000 calc(100% - ${FADE}), transparent 100%)`,
+  maskImage: `linear-gradient(to right, transparent 0%, #000 ${FADE}, #000 calc(100% - ${FADE}), transparent 100%), linear-gradient(to bottom, transparent 0%, #000 ${FADE}, #000 calc(100% - ${FADE}), transparent 100%)`,
+  WebkitMaskComposite: "source-in",
+  maskComposite: "intersect",
+};
 
 export default function StoryPhotoCarousel({ photos = [], alt = "" }) {
   const [[index, direction], setIndex] = useState([0, 0]);
@@ -60,15 +70,12 @@ export default function StoryPhotoCarousel({ photos = [], alt = "" }) {
 
   return (
     <div
-      className="relative mx-auto h-72 w-64 sm:h-80 sm:w-72"
+      className="relative mx-auto h-80 w-72 sm:h-[26rem] sm:w-[22rem]"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* tumpukan kertas foto di belakang, murni dekorasi */}
-      <div className="pointer-events-none absolute inset-0 rotate-6 rounded-sm bg-surface shadow-2xl shadow-black/40" />
-      <div className="pointer-events-none absolute inset-0 -rotate-3 rounded-sm bg-surface shadow-2xl shadow-black/40" />
-
-      <div className="absolute inset-0 overflow-hidden rounded-sm shadow-2xl shadow-black/50">
+      {/* Foto dengan tepi memudar ke latar belakang (mask tetap, foto yang bergeser di dalamnya) */}
+      <div className="absolute inset-0" style={FADE_MASK}>
         <AnimatePresence initial={false} custom={direction} mode="popLayout">
           <motion.div
             key={current}
@@ -77,15 +84,13 @@ export default function StoryPhotoCarousel({ photos = [], alt = "" }) {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ x: { type: "spring", stiffness: 300, damping: 30 }, opacity: { duration: 0.2 } }}
+            transition={{ x: { type: "spring", stiffness: 300, damping: 30 }, opacity: { duration: 0.25 } }}
             drag={total > 1 ? "x" : false}
             dragElastic={0.15}
             dragConstraints={{ left: 0, right: 0 }}
             dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
             onDragStart={() => setDragging(true)}
             onDragEnd={handleDragEnd}
-            whileDrag={{ scale: 1.04 }}
-            whileHover={{ scale: 1.02 }}
             className="absolute inset-0 cursor-grab select-none active:cursor-grabbing"
           >
             <img
@@ -105,7 +110,7 @@ export default function StoryPhotoCarousel({ photos = [], alt = "" }) {
             type="button"
             onClick={goPrev}
             aria-label="Foto sebelumnya"
-            className="absolute left-2 top-1/2 z-10 hidden -translate-y-1/2 rounded-full bg-black/40 p-2 text-white backdrop-blur-sm transition-colors hover:bg-black/60 sm:flex"
+            className="absolute left-2 top-1/2 z-10 hidden -translate-y-1/2 rounded-full bg-black/40 p-2 text-white transition-colors hover:bg-black/60 sm:flex"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
@@ -115,7 +120,7 @@ export default function StoryPhotoCarousel({ photos = [], alt = "" }) {
             type="button"
             onClick={goNext}
             aria-label="Foto berikutnya"
-            className="absolute right-2 top-1/2 z-10 hidden -translate-y-1/2 rounded-full bg-black/40 p-2 text-white backdrop-blur-sm transition-colors hover:bg-black/60 sm:flex"
+            className="absolute right-2 top-1/2 z-10 hidden -translate-y-1/2 rounded-full bg-black/40 p-2 text-white transition-colors hover:bg-black/60 sm:flex"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
