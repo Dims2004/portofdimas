@@ -1,0 +1,443 @@
+/* ============================================================
+   SLIDE PORTOFOLIO (A4 landscape) — hanya tampil saat cetak / Save as PDF
+   ============================================================ */
+#portfolio-print {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+  html,
+  body {
+    background: #05070a !important;
+    width: 297mm;
+    margin: 0 !important;
+    padding: 0 !important;
+    cursor: auto;
+  }
+  #root {
+    display: none !important;
+  }
+  #portfolio-print {
+    display: block;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+.pf-slide {
+  position: relative;
+  width: 297mm;
+  height: 209mm;
+  box-sizing: border-box;
+  padding: 15mm 18mm 16mm;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: #dfe7e0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(140deg, #0a0e12 0%, #070b0e 45%, #05070a 100%);
+  break-after: page;
+  page-break-after: always;
+}
+#portfolio-print > :last-child .pf-slide,
+#portfolio-print > .pf-slide:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}
+.pf-glow {
+  position: absolute;
+  right: -40mm;
+  top: -40mm;
+  width: 140mm;
+  height: 140mm;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(224, 35, 28, 0.30), transparent 65%);
+  pointer-events: none;
+}
+.pf-head {
+  position: relative;
+  margin-bottom: 7mm;
+}
+.pf-kicker {
+  display: block;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #dfe7e0;
+  margin-bottom: 2mm;
+}
+.pf-head h2 {
+  margin: 0;
+  font-size: 24pt;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+}
+.pf-rule {
+  display: block;
+  width: 14mm;
+  height: 0.9mm;
+  border-radius: 1mm;
+  background: #c9a24a;
+  margin-top: 3mm;
+}
+.pf-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.pf-foot {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4mm;
+  padding-top: 2.5mm;
+  border-top: 0.3mm solid rgba(223,231,224, 0.2);
+  font-size: 7.5pt;
+  color: #8a958f;
+}
+
+.pf-p {
+  font-size: 10pt;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 3.5mm;
+}
+.pf-small {
+  font-size: 9pt;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 2.5mm;
+}
+.pf-strong {
+  font-size: 10.5pt;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #fff;
+  margin: 0 0 2.5mm;
+}
+.pf-muted {
+  font-size: 9pt;
+  color: #8a958f;
+  margin: 0 0 1.5mm;
+}
+.pf-meta {
+  font-size: 9pt;
+  color: #dfe7e0;
+  margin: 3mm 0;
+}
+.pf-meta b {
+  color: #fff;
+}
+.pf-sub {
+  font-size: 11pt;
+  font-weight: 700;
+  color: #dfe7e0;
+  margin: 0 0 3mm;
+}
+.pf-cols {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 10mm;
+}
+.pf-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5mm;
+  margin-bottom: 6mm;
+}
+.pf-grow {
+  flex: 1;
+  margin-bottom: 0;
+}
+.pf-card {
+  box-sizing: border-box;
+  padding: 5mm 6mm;
+  border-radius: 4mm;
+  background: rgba(255, 255, 255, 0.06);
+  border: 0.3mm solid rgba(223,231,224, 0.22);
+  margin-bottom: 4mm;
+  break-inside: avoid;
+}
+.pf-grid2 > .pf-card {
+  margin-bottom: 0;
+}
+.pf-card h3 {
+  margin: 0 0 2mm;
+  font-size: 10.5pt;
+  font-weight: 700;
+  color: #dfe7e0;
+}
+.pf-card h4 {
+  margin: 0 0 2mm;
+  font-size: 10.5pt;
+  font-weight: 700;
+  color: #fff;
+}
+.pf-card h4.pf-big {
+  font-size: 15pt;
+  line-height: 1.25;
+  margin: 3mm 0 2mm;
+}
+.pf-tall {
+  display: flex;
+  flex-direction: column;
+}
+.pf-chip,
+.pf-chips span {
+  display: inline-block;
+  font-size: 8pt;
+  font-weight: 600;
+  color: #e6f9ff;
+  padding: 1mm 3mm;
+  border-radius: 10mm;
+  border: 0.3mm solid rgba(223,231,224, 0.4);
+  background: rgba(245, 185, 66, 0.14);
+  align-self: flex-start;
+}
+.pf-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2mm;
+  margin: 0 0 3mm;
+}
+.pf-list {
+  margin: 2mm 0 3mm;
+  padding-left: 5mm;
+  font-size: 10pt;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+.pf-thumb {
+  margin-top: auto;
+  height: 52mm;
+}
+.pf-thumb .pf-img {
+  height: 100%;
+}
+
+.pf-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 3mm;
+  background-color: #0b1030;
+}
+.pf-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(4, 5, 12, 0.55);
+}
+
+.pf-project {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 9mm;
+  flex: 1;
+  min-height: 0;
+}
+.pf-project-img {
+  height: 100%;
+  max-height: 135mm;
+}
+.pf-gallery {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  gap: 5mm;
+  align-content: center;
+}
+.pf-gallery figure,
+.pf-certs figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.pf-gallery .pf-img {
+  height: 62mm;
+}
+.pf-gallery figcaption {
+  font-size: 8.5pt;
+  line-height: 1.4;
+  color: #bcd6ee;
+  margin-top: 2mm;
+  text-align: center;
+}
+.pf-certs {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 5mm 6mm;
+}
+.pf-certs .pf-img {
+  flex: 1;
+  min-height: 0;
+}
+.pf-certs figcaption {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5mm;
+  font-size: 8pt;
+  line-height: 1.35;
+  color: #8a958f;
+}
+.pf-certs figcaption b {
+  color: #fff;
+  font-size: 8.5pt;
+}
+
+/* Cover */
+.pf-cover {
+  flex-direction: row;
+  align-items: center;
+  gap: 14mm;
+  padding: 18mm 20mm;
+}
+.pf-cover-text {
+  position: relative;
+  flex: 1.2;
+}
+.pf-cover h1 {
+  margin: 0 0 6mm;
+  font-size: 40pt;
+  line-height: 1.05;
+  font-weight: 800;
+  color: #fff;
+}
+.pf-role {
+  margin: 0;
+  font-size: 15pt;
+  font-weight: 600;
+  color: #fff;
+}
+.pf-tags {
+  margin: 1.5mm 0 7mm;
+  font-size: 9pt;
+  color: #dfe7e0;
+}
+.pf-lead {
+  font-size: 11pt;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 120mm;
+  margin: 0 0 6mm;
+}
+.pf-mail {
+  font-size: 11pt;
+  font-weight: 700;
+  color: #dfe7e0;
+  margin: 0;
+}
+.pf-cover-photo {
+  position: relative;
+  width: 82mm;
+  flex: none;
+  border-radius: 6mm;
+  overflow: hidden;
+  border: 0.3mm solid rgba(255, 255, 255, 0.25);
+  background: #050818;
+}
+.pf-cover-photo img {
+  display: block;
+  width: 100%;
+  height: 100mm;
+  object-fit: cover;
+  object-position: top;
+  background: linear-gradient(#0e7490, #0a0e12);
+}
+.pf-cover-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1mm;
+  padding: 5mm 6mm 6mm;
+}
+.pf-cover-card strong {
+  font-size: 17pt;
+  color: #fff;
+}
+.pf-cover-card span {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c9a24a;
+}
+.pf-cover-card small {
+  font-size: 8pt;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Kontak */
+.pf-contact {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pf-mail-big {
+  font-size: 24pt;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 9mm;
+}
+.pf-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+}
+.pf-socials div {
+  display: flex;
+  gap: 6mm;
+  font-size: 10pt;
+  padding-bottom: 3mm;
+  border-bottom: 0.3mm solid rgba(223,231,224, 0.18);
+}
+.pf-socials b {
+  width: 28mm;
+  color: #dfe7e0;
+}
+.pf-socials span {
+  color: rgba(255, 255, 255, 0.85);
+}
+.pf-thanks {
+  margin: 12mm 0 0;
+  font-size: 13pt;
+  font-weight: 700;
+  color: #c9a24a;
+}
+
+/* Slide "Tentang": rapatkan supaya muat di A4 */
+.pf-tight .pf-p {
+  font-size: 9pt;
+  line-height: 1.5;
+  margin-bottom: 3mm;
+}
+.pf-tight .pf-small {
+  font-size: 8.5pt;
+  line-height: 1.45;
+  margin-bottom: 2mm;
+}
+.pf-tight .pf-card {
+  padding: 4mm 5mm;
+  margin-bottom: 3mm;
+}
+.pf-tight .pf-grid2 {
+  gap: 3mm;
+  margin-bottom: 3mm;
+}
+.pf-tight .pf-grid2 > .pf-card {
+  margin-bottom: 0;
+}
