@@ -12,7 +12,7 @@ export const profile = {
   cv: "Dimas_Febrianto_resume.pdf",
 
   // Foto yang tampil di ID card (hero). Ganti ke foto portrait pilihan Anda.
-  photo: "dimas11.jpeg",
+  photo: "dimas1.jpeg",
 
   // Foto yang bisa di-swipe di bagian "Tentang"
   storyPhotos: ["fotolulus.jpeg", "FOTO1.jpeg", "FOTO2.jpeg", "FOTO3.jpeg","dimas12.jpeg"],
