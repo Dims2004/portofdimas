@@ -50,7 +50,7 @@ export default function WorkDetail() {
       <section id="portfolio-details" className="portfolio-details section">
         <div className="container">
           <div className="row gy-4">
-            <div className="col-lg-8">
+            <div className="col-12">
               <div className="detail-slider">
                 {images.length ? (
                   <>
@@ -85,7 +85,7 @@ export default function WorkDetail() {
               </div>
             </div>
 
-            <div className="col-lg-4">
+              <div className="col-12">
               <div className="portfolio-info">
                 <h3>{d.info}</h3>
                 <ul>
