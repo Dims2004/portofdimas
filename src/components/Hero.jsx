@@ -19,7 +19,6 @@ export default function Hero() {
             <small>~/portofolio/{profile.shortName.toLowerCase()}.jsx</small>
           </div>
           <div className="hero-body">
-            <img className="hero-photo" src={withBase(profile.photo)} alt={profile.name} />
             <div>
               <h2>{profile.name}</h2>
               <p>
