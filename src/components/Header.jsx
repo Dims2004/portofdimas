@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useLanguage } from "../lib/LanguageContext";
 import { withBase } from "../lib/assetPath";
-import { socialIcon } from "../lib/icons";
 import { profile } from "../data/profile";
 import useScrollSpy from "../hooks/useScrollSpy";
 
@@ -58,18 +57,6 @@ export default function Header() {
 
       <aside id="header" className={`sidebar ${open ? "open" : ""}`}>
         <img src={withBase(profile.photo)} alt={profile.name} className="side-photo" />
-
-        <a href="#/" className="side-name" onClick={(e) => goTo(e, "hero")}>
-          {profile.name}
-        </a>
-
-        <div className="side-social">
-          {profile.socials.map((s) => (
-            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={s.label}>
-              <i className={`bi ${socialIcon(s.label)}`} />
-            </a>
-          ))}
-        </div>
 
         <button
           type="button"
