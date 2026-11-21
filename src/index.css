@@ -560,3 +560,7 @@ body::before { background: rgba(255, 255, 255, 0.18); }
 @media (max-width: 575px) {
   .about .content > p { text-align: left; }
 }
+
+/* sidebar tanpa nama & ikon sosial: atur ulang jarak */
+.side-photo { margin-bottom: 20px; }
+.sidebar .lang-switch { margin-bottom: 22px; }
