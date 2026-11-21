@@ -564,3 +564,56 @@ body::before { background: rgba(255, 255, 255, 0.18); }
 /* sidebar tanpa nama & ikon sosial: atur ulang jarak */
 .side-photo { margin-bottom: 20px; }
 .sidebar .lang-switch { margin-bottom: 22px; }
+
+/* ============ DETAIL PROYEK: info & deskripsi di bawah foto, teks putih ============ */
+.detail-slider { max-width: 900px; margin: 0 auto; }
+.detail-caption { margin-bottom: 4px; }
+
+.portfolio-details .portfolio-info,
+.portfolio-details .portfolio-description {
+  max-width: 900px; margin: 22px auto 0; padding: 26px 32px; border-radius: var(--radius);
+  background: rgba(24, 28, 70, 0.66); color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 12px 36px rgba(30, 34, 80, 0.25);
+  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+}
+.portfolio-details .portfolio-info h3,
+.portfolio-details .portfolio-description h2 { color: #fff; }
+.portfolio-details .portfolio-info h3 { border-bottom-color: rgba(255, 255, 255, 0.25); }
+.portfolio-details .portfolio-info strong { color: #fff; }
+.portfolio-details .portfolio-info a { color: #9fd0ff; }
+.portfolio-details .portfolio-info a:hover { color: #fff; }
+
+/* info proyek: beberapa kolom agar tidak memanjang ke bawah */
+.portfolio-details .portfolio-info ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px 28px; }
+.portfolio-details .portfolio-info li + li { margin-top: 0; }
+
+.portfolio-details .portfolio-description p {
+  margin: 0 0 14px; color: rgba(255, 255, 255, 0.94);
+  text-align: justify; text-justify: inter-word; line-height: 1.75;
+}
+.portfolio-details .portfolio-description p:last-child { margin-bottom: 0; }
+.portfolio-details .portfolio-description h2 { margin: 0 0 14px; font-size: 24px; }
+
+@media (max-width: 575px) {
+  .portfolio-details .portfolio-info, .portfolio-details .portfolio-description { padding: 22px 20px; }
+  .portfolio-details .portfolio-description p { text-align: left; }
+}
+
+/* ============ DETAIL PROYEK: panel kaca (macOS) ============ */
+.portfolio-details .portfolio-info,
+.portfolio-details .portfolio-description {
+  background: rgba(255, 255, 255, 0.58);
+  color: var(--default-color);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 10px 34px rgba(40, 60, 140, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(26px) saturate(190%);
+  backdrop-filter: blur(26px) saturate(190%);
+}
+.portfolio-details .portfolio-info h3,
+.portfolio-details .portfolio-description h2 { color: var(--heading-color); }
+.portfolio-details .portfolio-info h3 { border-bottom-color: rgba(20, 24, 58, 0.12); }
+.portfolio-details .portfolio-info strong { color: var(--heading-color); }
+.portfolio-details .portfolio-info a { color: var(--blue); }
+.portfolio-details .portfolio-info a:hover { color: var(--violet); }
+.portfolio-details .portfolio-description p { color: var(--default-color); }
