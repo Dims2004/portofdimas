@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useLanguage } from "../lib/LanguageContext";
 import { withBase } from "../lib/assetPath";
+import { socialIcon } from "../lib/icons";
 import { profile } from "../data/profile";
 import useScrollSpy from "../hooks/useScrollSpy";
 
@@ -44,24 +45,31 @@ export default function Header() {
   const isEn = lang === "en";
 
   return (
-    <header id="header" className={`topbar ${open ? "open" : ""}`}>
-      <div className="topbar-in">
-        <a href="#/" className="logo" onClick={(e) => goTo(e, "hero")}>
-          <img src={withBase(profile.photo)} alt="" className="logo-photo" />
-          <span className="sitename">{profile.name}</span>
+    <>
+      <button
+        type="button"
+        className="side-toggle"
+        aria-label="Menu"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+      >
+        <i className={`bi ${open ? "bi-x-lg" : "bi-list"}`} />
+      </button>
+
+      <aside id="header" className={`sidebar ${open ? "open" : ""}`}>
+        <img src={withBase(profile.photo)} alt={profile.name} className="side-photo" />
+
+        <a href="#/" className="side-name" onClick={(e) => goTo(e, "hero")}>
+          {profile.name}
         </a>
 
-        <nav id="navmenu" className="topnav" aria-label="Menu utama">
-          <ul>
-            {NAV.map((n) => (
-              <li key={n.id}>
-                <a href="#/" className={onHome && active === n.id ? "active" : ""} onClick={(e) => goTo(e, n.id)}>
-                  <i className={`bi ${n.icon}`} /> {t.site.nav[n.key]}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="side-social">
+          {profile.socials.map((s) => (
+            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={s.label}>
+              <i className={`bi ${socialIcon(s.label)}`} />
+            </a>
+          ))}
+        </div>
 
         <button
           type="button"
@@ -76,16 +84,18 @@ export default function Header() {
           <b className={isEn ? "on" : ""}>EN</b>
         </button>
 
-        <button
-          type="button"
-          className="topbar-toggle"
-          aria-label="Menu"
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          <i className={`bi ${open ? "bi-x-lg" : "bi-list"}`} />
-        </button>
-      </div>
-    </header>
+        <nav id="navmenu" className="sidenav" aria-label="Menu utama">
+          <ul>
+            {NAV.map((n) => (
+              <li key={n.id}>
+                <a href="#/" className={onHome && active === n.id ? "active" : ""} onClick={(e) => goTo(e, n.id)}>
+                  <i className={`bi ${n.icon}`} /> {t.site.nav[n.key]}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+    </>
   );
 }
